@@ -1,0 +1,38 @@
+<div class="p-3">
+    <div class="my-2">
+    <h1 class="fs20">Choose Category</h1>
+    <mat-card>
+        <!-- form filed for selecting category for producing results -->
+        <form>
+            <mat-nav-list class="list-horizontal">
+                <mat-list-item>
+                    <mat-label>SelectFields</mat-label>
+                    <mat-select multiple>
+                        <mat-option *ngFor="let fields of fieldsList" [value]="fields">{{fields}}</mat-option>
+                    </mat-select>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-label>SelectEvents</mat-label>
+                    <mat-select multiple>
+                        <mat-option *ngFor="let events of eventList" [value]="events">{{events}}</mat-option>
+                    </mat-select>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-label>SelectValidations</mat-label>
+                    <mat-select multiple>
+                        <mat-option *ngFor="let valid of validationList" [value]="valid">{{valid}}</mat-option>
+                    </mat-select>
+                </mat-list-item>
+                <mat-list-item>
+                    <button mat-raised-button color="primary" class="mx-auto">Submit</button>
+                </mat-list-item>
+              </mat-nav-list>
+        </form>
+    </mat-card>
+    </div>
+    <div class="my-4">
+        <mat-card class="d-flex justify-content-center">
+           <p>Please Wait for Results!</p>
+        </mat-card>
+    </div>
+</div>
