@@ -1,0 +1,36 @@
+{
+    "input":
+    {
+        "html":
+        {
+            "basic": "<input #box matInput value=''/>",            
+            "keyup": "(keyup)='onKey(box.value)'",
+            "keyupenter": "(keyup.enter)='onKeyEnter(box.value)'",
+            "blur": "(blur)='onBlur(box.value)'",
+            "change": "(change)='onChange(box.value)'"
+        },
+        "validation":
+        {
+            "required": "required",
+            "placeholder": "placeholder",
+            "hint": "<mat-hint align='start'><strong>Don't disclose personal info</strong> </mat-hint>"
+        },
+        "unittest":
+        {
+            "keyupUnitTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)",
+
+            "keyupenterTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKeyEnter'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupenter();  tick(); expect(component.onKeyEnter).toHaveBeenCalled();)",
+
+            "blurTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onBlur'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.blur(); tick(); expect(component.onBlur).toHaveBeenCalled();)",
+
+            "changeTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled();)"
+        },
+        "ts":
+        {
+            "keyup":"onKey(boxvalue:string){console.log(boxvalue);}",
+            "keyupenter":"onKeyEnter(boxvalue:string){console.log(boxvalue);}",
+            "blur":"onBlur(boxvalue:string){console.log(boxvalue);}",
+            "change":"onChange(boxvalue:string){console.log(boxvalue);}"
+        }
+    }   
+}
