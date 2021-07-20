@@ -17,13 +17,13 @@
         },
         "unittest":
         {
-            "keyupUnitTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)",
+            "keyupUnitTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled(); }) })",
 
-            "keyupenterTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKeyEnter'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupenter();  tick(); expect(component.onKeyEnter).toHaveBeenCalled();)",
+            "keyupenterTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKeyEnter'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupenter();  tick(); expect(component.onKeyEnter).toHaveBeenCalled(); }) })",
 
-            "blurTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onBlur'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.blur(); tick(); expect(component.onBlur).toHaveBeenCalled();)",
+            "blurTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onBlur'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.blur(); tick(); expect(component.onBlur).toHaveBeenCalled(); }) })",
 
-            "changeTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled();)"
+            "changeTest": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
         },
         "ts":
         {
@@ -32,5 +32,14 @@
             "blur":"onBlur(boxvalue:string){console.log(boxvalue);}",
             "change":"onChange(boxvalue:string){console.log(boxvalue);}"
         }
-    }   
+    },   
+
+    "button": {
+        "unittest": {
+            "clickEvent": "it('check for click event', async() =>  const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance; fakeAsync() => { spyOn(component, 'clickFunction'); let button = fixture.debugElement.query(By.css('button')); button.triggerEventHandler('click', null); tick(); expect(component.clickFunction).toHaveBeenCalled(); })})",
+
+            "disableButton": ""
+        }
+
+    }
 }

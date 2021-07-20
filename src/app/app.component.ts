@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'CommonModule';
+  checkButton = false;
   fieldsList: string[] = ['input', 'button', 'select', 'modal', 'tooltip'];
   eventList: string[] = ['keyup','change','keyupenter', 'blur'];
   validationList: string[] = ['required', 'placeholder', 'hint','mismatch', 'invalid'];
@@ -136,5 +137,9 @@ export class AppComponent {
       this.specsnippet = specTemplate;
 
     });
+  }
+
+  clickFunction() {
+    this.checkButton = !this.checkButton;
   }
 }
