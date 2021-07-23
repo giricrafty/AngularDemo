@@ -80,5 +80,21 @@
         {
             "input":"onInputChange(event: MatSliderChange) {console.log(event.value);}"
         }
-    }   
+    },
+    "select": {
+        "html": "<select id='selectid'><option value=''></option></select>",
+        "event": {
+            "change": "(change)='onChangeSelect($event.target.value)'"
+        },
+        "validation": {
+            "required": "required"
+        },
+        "ts":
+        {
+            "change":"onChangeSelect(selectedValue: string){console.log('onChange = ' +selectedValue);}"
+        },
+        "unittest": {
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+        }
+    }
 }
