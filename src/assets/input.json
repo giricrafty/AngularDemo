@@ -7,14 +7,15 @@
             "keyup": "(keyup)='onKey(box.value)'",
             "keyupenter": "(keyup.enter)='onKeyEnter(box.value)'",
             "blur": "(blur)='onBlur(box.value)'",
-            "change": "(change)='onChange(box.value)'"
+            "change": "(change)='onChange(box.value)'",
+            "keypress": "(keypress)='restrictNumeric($event)'"
         },
         "validation":
         {
             "required": "required",
             "disabled": "disabled",
             "placeholder": "Please enter the value",
-            "number":"type='number'",
+            "number":"type='text'",
             "maxlength":"maxlength='9'",
             "minlength":"minlength='3'",
             "email":"pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$'"
@@ -27,14 +28,18 @@
 
             "blur": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onBlur'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.blur(); tick(); expect(component.onBlur).toHaveBeenCalled(); }) })",
 
-            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })",
+
+            "keypress": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKeyPress'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupress();  tick(); expect(component.onKeyPress).toHaveBeenCalled(); }) })"
+
         },
         "ts":
         {
             "keyup":"onKey(boxvalue:string){console.log('onKey = ' + boxvalue);}",
             "keyupenter":"onKeyEnter(boxvalue:string){console.log('onKeyEnter = ' +boxvalue);}",
             "blur":"onBlur(boxvalue:string){console.log('onBlur = ' +boxvalue);}",
-            "change":"onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+            "change":"onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}",
+            "keypress": "restrictNumeric(e){var data; var regex=/[\\d\\s]/;if(e.metaKey || e.ctrlKey){return true;} if(e.which === 0){return true;} if(e.which<33){return true;}data=String.fromCharCode(e.which);return e.target.value.length < 8!! && regex.test(data);}"
         }
     },
     "slidder":

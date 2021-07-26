@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "CommonModule"
+  "defaultProject": "CommonModule",
+  "cli": {
+    "analytics": "473e8813-eafd-4403-9f01-1d7018933137"
+  }
 }

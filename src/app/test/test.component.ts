@@ -20,4 +20,6 @@ export class TestComponent implements OnInit {
    
   onBlur(boxvalue:string){console.log('onBlur = ' +boxvalue);}
 
+  // restrictNumeric(e: any){var data; var regex=/[\\d\\s]/;if(e.metaKey || e.ctrlKey){return true;} if(e.which === 0){return true;} if(e.which<33){return true;}data=String.fromCharCode(e.which);return e.target.value.length < 8!! && regex.test(data);}
+
 }
