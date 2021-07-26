@@ -1,7 +1,7 @@
 <div style="background-color: rgb(56, 53, 252); color:white">
     <h1 style="font-size: 200%; padding-top: 20px; padding-bottom: 20px; font-weight: bold ;" class="d-flex justify-content-center">Demo Tool</h1>
     </div>
-    <input id="caseNum" name="caseNum" class="form-control"  type="text" [(ngModel)]="test" minlength="3" maxlength="30"/>
+    <!-- <input id="caseNum" name="caseNum" class="form-control"  type="text" [(ngModel)]="test" minlength="3" maxlength="30"/> -->
     <div class="p-3">
         <div class="my-2">
             <form>
@@ -11,23 +11,30 @@
                         <mat-option *ngFor="let fields of fieldsList"  [value]="fields">{{fields}}</mat-option>
                     </mat-select>
                   </mat-form-field>
+
+                  <mat-form-field *ngIf="typeListCheck" style="width:17%;margin-left: 1%;" appearance="fill">
+                    <mat-label>Component</mat-label>
+                    <mat-select name="type" [(ngModel)]="selectedType">
+                        <mat-option *ngFor="let types of typeList"  [value]="types">{{types}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 
-                  <mat-form-field style="width:40%;margin-left: 1%;" appearance="fill">
+                  <mat-form-field style="width:30%;margin-left: 1%;" appearance="fill">
                     <mat-label>Events</mat-label>
                     <mat-select name="events" multiple [(ngModel)]="selectedEvents" >
                         <mat-option *ngFor="let events of eventList" [value]="events">{{events}}</mat-option>
                     </mat-select>
                   </mat-form-field>
     
-                  <mat-form-field style="width:40%;margin-left: 1%;" appearance="fill">
+                  <mat-form-field style="width:30%;margin-left: 1%;" appearance="fill">
                     <mat-label>Validation</mat-label>
                     <mat-select name="validation" multiple [(ngModel)]="selectedValidation">
                         <mat-option *ngFor="let valid of validationList" [value]="valid">{{valid}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                     
-                    <button mat-raised-button color="primary" style="float:right;" type="button" (click)="btnClick()">Submit</button>                
-                    <button mat-raised-button color="primary" style="float:right;" type="button" (click)="btnNavigate()">Test</button>                
+                    <button mat-raised-button color="primary" style="float:right; margin-top: 10px;" type="button" (click)="btnClick()">Submit</button>                
+                    <button mat-raised-button color="primary" style="float:right; margin-top: 10px;" type="button" (click)="btnNavigate()">Test</button>                
             </form>
             <div *ngIf=testcases>
                 <app-test></app-test>
