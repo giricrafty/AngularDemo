@@ -1,13 +1,7 @@
 {
     "input":
     {
-        "html":"<input #box matInput value=''/>",
-        "type": {
-            "text": "type= 'text'",
-            "number": "type='number'",
-            "checkbox": "type='checkbox'",
-            "radio": "type='radio'"
-        },
+        "html":"<input #box type='text' matInput value=''/>",
         "event":
         {           
             "keyup": "(keyup)='onKey(box.value)'",
@@ -100,7 +94,71 @@
             "change":"onChangeSelect(selectedValue: string){console.log('onChange = ' +selectedValue);}"
         },
         "unittest": {
-            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChangeSelect'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('select')); input.nativeElement.change(); tick(); expect(component.onChangeSelect).toHaveBeenCalled(); }) })"
         }
-    }
+    },
+    "button": {
+        "html": "<mat-button color='primary' outline='true'>Primary Button</mat-button>",
+        "event": {
+          "click": "(click)='eventClick('form values')'"
+        },
+        "validation": {
+          "disabled": "disabled"
+        },
+        "unittest": {
+            "click": "it('should be button identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'eventClick'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-button')); input.nativeElement.click(); tick(); expect(component.eventClick).toHaveBeenCalled(); }) })"
+        },
+        "ts": {
+          "click": "eventClick(getForm: string) {console.log(getForm);}"
+        }
+    },
+    "button toggle": {
+        "html": "<mat-button-toggle-group>  </mat-button-toggle-group>",
+        "event": {
+            "change": "(change)='onChange($event.target.value)'"
+        },
+        "validation": {
+          "disabled": "disabled"
+        },
+        "ts": {
+            "change":"onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+          },
+        "unittest": {
+            "change": "it('should be button toggle identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-button-toggle-group')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+        }
+      },
+    "checkbox":{
+          "html":"<input #box matInput value='' type='checkbox'/>",
+          "event": {
+            "change": "(change)='onChange(box.value)'"
+          },
+          "validation":
+          {
+              "required": "required",
+              "disabled": "disabled"
+          },
+          "ts": {
+            "change":"onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+          },
+          "unittest": {
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+          }
+    },
+    "radio":{
+        "html":"<input #box matInput value='' type='radio'/>",
+        "event": {
+          "change": "(change)='onChange(box.value)'"
+        },
+        "validation":
+        {
+            "required": "required",
+            "disabled": "disabled"
+        },
+        "unittest": {
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+        },
+        "ts": {
+            "change":"onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+        }
+  }
 }
