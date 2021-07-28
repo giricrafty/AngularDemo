@@ -9,12 +9,12 @@ import { OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'CommonModule';
-  fieldsList: string[] = ['input', 'button', 'select', 'slidder', 'slidetoggle'];
+  fieldsList: string[] = ['input', 'button', 'select', 'slidder', 'slidetoggle', 'checkbox', 'radio'];
   eventList: string[] = ['keyup','change','keyupenter', 'blur'];
   validationList: string[] = ['required', 'disabled','placeholder','number','maxlength','minlength','email'];
   template:any;
 
-  test:string ="";
+  // test:string ="";
   testcases=false;
   htmlsnippet: string = "";
   tssnippet: string = "";  
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   selectedComponent:any;
   selectedEvents:any;
   selectedValidation:any;
+
 
   private httpClient: HttpClient;
 
@@ -51,16 +52,17 @@ export class AppComponent implements OnInit {
 
   btnClick()
   {
+    console.log(this.selectedEvents);
       this.htmlsnippet = JSON.stringify(this.template[this.selectedComponent]["html"]);
-
+      console.log(this.htmlsnippet);
       //Events html template
       let events:string ="";
       for(let i=0;i<this.selectedEvents.length;i++)
       {
-        events=events+" "+JSON.stringify(this.template[this.selectedComponent]["event"][this.selectedEvents[i]]);              
+        events=events+" "+JSON.stringify(this.template[this.selectedComponent]["event"][this.selectedEvents[i]]);
       }
-
       this.htmlsnippet = this.htmlsnippet.replace("<"+this.selectedComponent,"<"+this.selectedComponent+events);
+      
       
       //Validations template
       let validations:string ="";
