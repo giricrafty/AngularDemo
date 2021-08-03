@@ -129,7 +129,7 @@
         },
         "unittest":
         {
-            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)"
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-form-field')); input.nativeElement.change();  tick(); expect(component.onChange).toHaveBeenCalled();)"
         },
         "ts":
         {
@@ -151,7 +151,7 @@
         },
         "unittest":
         {
-            "click": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)"
+            "click": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'openDialog'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('button')); input.nativeElement.click();  tick(); expect(component.openDialog).toHaveBeenCalled();)"
         },
         "ts":
         {
