@@ -1,0 +1,271 @@
+{
+    "input": {
+        "html": "<input #box matInput class='form-control-lg' value=''/>",
+        "tag": "input",
+        "event": {
+            "keyup": "(keyup)='onKey(box.value)'",
+            "keyupenter": "(keyup.enter)='onKeyEnter(box.value)'",
+            "blur": "(blur)='onBlur(box.value)'",
+            "change": "(change)='onChange(box.value)'",
+            "keypress": "(keypress)='restrictNumeric($event)'"
+        },
+        "validation": {
+            "required": "required",
+            "disabled": "disabled",
+            "placeholder": "Please enter the value",
+            "number": "type='text'",
+            "maxlength": "maxlength='9'",
+            "minlength": "minlength='3'",
+            "email": "pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$'"
+        },
+        "unittest": {
+            "keyup": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled(); }) })",
+            "keyupenter": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKeyEnter'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupenter();  tick(); expect(component.onKeyEnter).toHaveBeenCalled(); }) })",
+            "blur": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onBlur'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.blur(); tick(); expect(component.onBlur).toHaveBeenCalled(); }) })",
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })",
+            "keypress": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKeyPress'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupress();  tick(); expect(component.onKeyPress).toHaveBeenCalled(); }) })"
+        },
+        "ts": {
+            "keyup": "onKey(boxvalue:string){console.log('onKey = ' + boxvalue);}",
+            "keyupenter": "onKeyEnter(boxvalue:string){console.log('onKeyEnter = ' +boxvalue);}",
+            "blur": "onBlur(boxvalue:string){console.log('onBlur = ' +boxvalue);}",
+            "change": "onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}",
+            "keypress": "restrictNumeric(e){var data; var regex=/[\\d\\s]/;if(e.metaKey || e.ctrlKey){return true;} if(e.which === 0){return true;} if(e.which<33){return true;}data=String.fromCharCode(e.which);return e.target.value.length < 8!! && regex.test(data);}"
+        }
+    },
+    "slidder": {
+        "html": "<input type='range' #range [disabled]='disabled' [max]='max' [min]='min' [step]='step' [(ngModel)]='value'/>",
+        "tag": "input",
+        "event": {
+            "change": "[change]='change(range.value)'"
+        },
+        "validation": {
+            "required": "required",
+            "disabled": "disabled"
+        },
+        "ts": {
+            "basic": "disabled = false;max = 100;min = 0;show;step = 1;value = 0;",
+            "change": "change(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+        }
+    },
+    "datepicker": {
+        "html": "<form class='form-inline'> <div class='form-group'><div class='input-group'> <input class='form-control' placeholder='yyyy-mm-dd' name='dp'  ngbDatepicker #d='ngbDatepicker'> <div class='input-group-append'> <button class='btn btn-outline-secondary calendar' (click)='d.toggle()' type='button'></button>",
+        "tag": "form",
+        "validation": {
+            "required": "required",
+            "disabled": "disabled"
+        },
+        "unittest": {
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)"
+        }
+    },
+    "select": {
+        "html": "<select id='selectid' class='form-select' [multiple]='multiple' [arialabel]='arialabel'><option value=''></option></select>",
+        "tag": "select",
+        "event": {
+            "change": "(change)='onChangeSelect($event.target.value)'"
+        },
+        "validation": {
+            "required": "required",
+            "disabled": "disabled"
+        },
+        "ts": {
+            "change": "onChangeSelect(selectedValue: string){console.log('onChange = ' +selectedValue);}"
+        },
+        "unittest": {
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChangeSelect'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('select')); input.nativeElement.change(); tick(); expect(component.onChangeSelect).toHaveBeenCalled(); }) })"
+        }
+    },
+    "button": {
+        "html": "<button class='btn btn-primary'>Primary Button</button>",
+        "tag": "button",
+        "event": {
+            "click": "(click)='eventClick('form values')'"
+        },
+        "validation": {
+            "disabled": "disabled"
+        },
+        "unittest": {
+            "click": "it('should be button identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'eventClick'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-button')); input.nativeElement.click(); tick(); expect(component.eventClick).toHaveBeenCalled(); }) })"
+        },
+        "ts": {
+            "click": "eventClick(getForm: string) {console.log(getForm);}"
+        }
+    },
+    "buttontoggle": {
+        "html": "<div class='btn-group' role='group'> <button type='button' class='btn btn-secondary'>Left</button> <button type='button' class='btn btn-secondary'>Middle</button><button type='button' class='btn btn-secondary'>Right</button></div>",
+        "tag": "button",
+        "event": {
+            "change": "(change)='onChange($event.target.value)'"
+        },
+        "validation": {
+            "disabled": "disabled"
+        },
+        "ts": {
+            "change": "onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+        },
+        "unittest": {
+            "change": "it('should be button toggle identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-button-toggle-group')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+        }
+    },
+    "checkbox": {
+        "html": "<input #box value='' type='checkbox' [checked]='checked'/>",
+        "tag": "input",
+        "event": {
+            "change": "(change)='onChange(box.value)'"
+        },
+        "validation": {
+            "required": "required",
+            "disabled": "disabled"
+        },
+        "ts": {
+            "change": "onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+        },
+        "unittest": {
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+        }
+    },
+    "radio": {
+        "html": "<input #box value='' type='radio' [checked]='checked'/>",
+        "tag": "input",
+        "event": {
+            "change": "(change)='onChange(box.value)'"
+        },
+        "validation": {
+            "required": "required",
+            "disabled": "disabled"
+        },
+        "unittest": {
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+        },
+        "ts": {
+            "change": "onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+        }
+    },
+    "table": {
+        "html": "<table class='table table-bordered'>",
+        "tag": "table",
+        "column": "<thead><tr><th scope='col'>#</th><th scope='col'>First</th><th scope='col'>Last</th></tr></thead><tbody><tr><th scope='row'>1</th><td>Mark</td><td>Otto</td></tr><tr><th scope='row'>2</th><td>Jacob</td><td>Thornton</td></tr></tbody></table>",
+        "event": {
+            "none": ""
+        },
+        "validation": {
+            "none": ""
+        },
+        "unittest": {
+            "none": ""
+        },
+        "ts": {}
+    },
+    "progressbar": {
+        "html": "<div class='progress'><div class='progress-bar' role='progress-bar' style='width: 25%' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>25%</div></div> ",
+        "tag": "div",
+        "event": {
+            "none": ""
+        },
+        "validation": {
+            "none": ""
+        },
+        "unittest": {
+            "none": ""
+        },
+        "ts": {
+            "none": ""
+        }
+    },
+    "textarea": {
+        "html": "<textarea class='form-control' id='exampleTextarea'></textarea>",
+        "tag": "textarea",
+        "event": {
+            "change": "(ngModelChange)='onChange($event)'"
+        },
+        "validation": {
+            "required": "required",
+            "disabled": "disabled",
+            "maxlength": "maxlength='9'",
+            "rows": "'3'"
+        },
+        "unittest": {
+            "change": "it('should be input identification', () => {​​​​​​​​ const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => {​​​​​​​​ spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }​​​​​​​​) }​​​​​​​​)"
+        },
+        "ts": {
+            "change": "onChange(boxvalue:string){​​​​​​​​console.log('onChange = ' +boxvalue);}​​​​​​​​"
+        }
+    },
+    "list": {
+        "html": "<ul><li>1</li><li>2</li></ul>",
+        "tag": "ul",
+        "event": {},
+        "validation": {},
+        "unittest": {},
+        "ts": {}
+    },
+    "menu": {
+        "html": "<nav class='navbar navbar-expand-lg navbar-dark bg-dark'><div class='collapse navbar-collapse'><div class='navbar-nav'><a class='nav-item nav-link active'>Home</a><a class='nav-item nav-link active'>About Us</a><a class='nav-item nav-link active'>Contact Us</a></div></div></nav>",
+        "tag": "nav",
+        "event": {
+            "none": ""
+        },
+        "validation": {
+            "none": ""
+        },
+        "unittest": {
+            "none": ""
+        },
+        "ts": {
+            "none": ""
+        }
+    },
+    "tabs": {
+        "html": "<ul class='nav nav-tabs'><li class='nav-item'><a class='nav-link active' aria-current='page' href='#'>Active</a></li><li class='nav-item'><a class='nav-link' href='#'>Link</a></li><li class='nav-item'><a class='nav-link' href='#'>Link</a></li><li class='nav-item'><a class='nav-link disabled' href='#' tabindex='-1' aria-disabled='true'>Disabled</a></li></ul>",
+        "tag": "ul",
+        "event": {},
+        "validation": {
+            "none": ""
+        },
+        "unittest": {},
+        "ts": {
+            "none": ""
+        }
+    },
+    "grid-list": {
+        "html": "<div class='container my-container'><div class='row my-row'><div class='col-md-4 my-col'>Row 1 Col 1</div><div class='col-md-8 my-col'>Row 1 Col 2</div></div><div class='row my-row'><div class='col my-col'>Row 2 Col 1</div></div></div>",
+        "tag": "div",
+        "event": {},
+        "validation": {},
+        "unittest": {},
+        "ts": {}
+    },
+    "expansion-panel": {
+        "html": "<button type='button' data-toggle='collapse' data-target='#demo'>Click Here</button>",
+        "tag": "<div id='demo' class='collapse'>Your collapse code goes here</div>",
+        "event": {
+            "none": ""
+        },
+        "validation": {
+            "none": ""
+        },
+        "unittest": {
+            "none": ""
+        },
+        "ts": {
+            "none": ""
+        }
+    },
+    "modal": {
+        "html": "<button type='button' class='btn btn-info btn-lg' (click)='openModal()'>Click to Open</button><div class='modal' tabindex='-1' role='dialog'  [ngStyle]='{​​​​​​​​display:display}​​​​​​​​'><div class='modal-dialog' role='document'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>Model Title</h4><button type='button' class='close' aria-label='Close' (click)='onCloseHandled()'><span aria-hidden='true'>&times;</span></button></div><div class='modal-body'><p>Model body text</p></div><div class='modal-footer'><button type='button' class='btn btn-default' (click)='onCloseHandled()' >Close</button></div></div></div></div>",
+        "tag": "",
+        "event": {
+            "none": ""
+        },
+        "validation": {
+            "none": ""
+        },
+        "unittest": {
+            "none": ""
+        },
+        "ts": {
+            "modal": "display = 'none';openModal() {​​​​​​​​this.display = 'block';}​​​​​​​​onCloseHandled() {​​​​​​​​this.display = 'none';}​​​​​​​​"
+        }
+    }
+}
