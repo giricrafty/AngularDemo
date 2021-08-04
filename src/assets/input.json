@@ -166,7 +166,8 @@
         {          
             "determinate": "mode='determinate' value='40'",
             "indeterminate": "mode='indeterminate'",
-            "buffer": "mode='buffer'"
+            "buffer": "mode='buffer'",
+            "query": "mode='query'"
         },
         "validation":
         {
@@ -174,9 +175,10 @@
         },
         "unittest":
         {
-            "determinate": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)",
-            "indeterminate": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)",
-            "buffer": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)"
+            "determinate": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance; expect(progressComponent.value).toBe(40); expect(progressComponent.mode).toBe('determinate');",
+            "indeterminate": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance;  expect(progressComponent.mode).toBe('indeterminate');",
+            "buffer": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance;  expect(progressComponent.mode).toBe('buffer');",
+            "query": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance;  expect(progressComponent.mode).toBe('query');"
         },
         "ts":
         {
