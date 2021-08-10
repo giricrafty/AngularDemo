@@ -1,0 +1,105 @@
+<div class="row" style="background-color: rgb(56, 53, 252); color:white">
+    <h1 style="font-size: 200%; padding-top: 20px; padding-bottom: 20px; font-weight: bold ;"
+        class="col-10 d-flex justify-content-center">Demo Tool</h1>
+    <button class="col" mat-raised-button color="primary" type="button" (click)="generateForm()">Generate Form</button>
+</div>
+<div class="p-3">
+    <div class="my-2">
+        <form>
+            <mat-form-field style="width:17%;margin-left: 1%;" appearance="fill">
+                <mat-label>Component</mat-label>
+                <mat-select name="component" (selectionChange)="onChange()" [(ngModel)]="selectedComponent">
+                    <mat-option *ngFor="let fields of fieldsList" [value]="fields">{{fields}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width:40%;margin-left: 1%;" [hidden]="hideEvent">
+                <mat-label>Events</mat-label>
+                <mat-select name="events" multiple [(ngModel)]="selectedEvents">
+                    <mat-option *ngFor="let events of eventList" [value]="events">{{events}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="width:40%;margin-left: 1%;" appearance="fill" [hidden]="hideValidation">
+                <mat-label>Validation</mat-label>
+                <mat-select name="validation" multiple [(ngModel)]="selectedValidation">
+                    <mat-option *ngFor="let valid of validationList" [value]="valid">{{valid}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" style="float:right;" type="button"
+                (click)="btnClick()">Submit</button>
+            <button mat-raised-button color="primary" style="float:right;" type="button"
+                (click)="btnNavigate()">Test</button>
+        </form>
+        <!---Code for table starts here-->
+        <div [hidden]="hideUserInput">
+            <form>
+                <label>Number of rows</label>
+                <input type="text" #row class="form-control">
+                <label>Number of columns</label>
+                <input type="text" #col class="form-control">
+                <button type="button" id="click" class="btn btn-primary"
+                    (click)="addTableControls(col.value,row.value)">Add Components, Events and Validations</button>
+            </form>
+        </div>
+        <form>
+            <div *ngFor="let l of total;let i = index" [hidden]="hideUserInput">
+                <mat-form-field style="width:17%;margin-left: 1%;" appearance="fill">
+                    <mat-label>Component for Column {{i +1}}</mat-label>
+                    <mat-select (selectionChange)="onChange1()" [(ngModel)]="selectComponent" name="selectComponent">
+                        <mat-option *ngFor="let field of fieldsList1" [value]="field">{{field}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                 <mat-form-field style="width:40%;margin-left: 1%;">
+                    <mat-label>Event for Column {{i+1}}</mat-label>
+                    <mat-select name="selectEvent" [(ngModel)]="selectEvent">
+                        <mat-option *ngFor="let event of eventList1" [value]="event">{{event}}</mat-option>
+                    </mat-select>
+                </mat-form-field> 
+                 <mat-form-field style="width:40%;margin-left: 1%;" appearance="fill">
+                    <mat-label>Validation for Column{{i+1}}</mat-label>
+                    <mat-select name="selectValidation" [(ngModel)]="selectValidation">
+                        <mat-option *ngFor="let valid of validationList" [value]="valid">{{valid}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+        <!---Code for table ends here-->
+        <div *ngIf=testcases>
+            <app-test></app-test>
+        </div>
+
+    </div>
+    <br />
+
+    <div class="my-4">
+        <mat-tab-group>
+            <mat-tab label="HTML">
+                <pre>
+                                      <code>
+                                          {{htmlsnippet}}
+                                      </code>
+                                  </pre>
+            </mat-tab>
+            <mat-tab label="BOOTSTRAPHTML">
+                <pre>
+                                    <code>
+                                        {{bootstraphtmlsnippet}}
+                                    </code>
+                                </pre>
+            </mat-tab>
+            <mat-tab label="TS">
+                <pre>
+                                      <code [innerHTML]="tssnippet">
+                                      </code>
+                                  </pre>
+            </mat-tab>
+            <mat-tab label="SPEC TS">
+                <pre>
+                                      <code [innerHTML]="specsnippet">
+                                      </code>
+                                  </pre>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+<router-outlet></router-outlet>
