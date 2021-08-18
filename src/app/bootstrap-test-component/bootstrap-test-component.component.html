@@ -1,0 +1,225 @@
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <td style="text-align: center;">
+                Input:
+            </td>
+            <td>
+                <input required (keyup)='onKey(box.value)' (blur)='onBlur(box.value)' #box class='form-control-lg'
+                    value='' placeholder="Enter text here" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Slider:
+            </td>
+            <td>
+                <input type='range' #range [disabled]='disabled' [max]='max' [min]='min' [step]='step'
+                    [(ngModel)]='value' />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Slide Toggle:
+            </td>
+            <td>
+                <div class='o-switch btn-group' data-toggle='buttons' role='group'><label
+                        class='btn btn-secondary active'><input type='radio' name='options' id='option1'
+                            autocomplete='off' checked> 1</label><label class='btn btn-secondary'><input type='radio'
+                            name='options' id='option2' autocomplete='off'>2</label><label
+                        class='btn btn-secondary'><input type='radio' name='options' id='option3'
+                            autocomplete='off'>3</label></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Dialog:
+            </td>
+            <td>
+                <button required (click)='openDialog()' type='button' class='btn btn-info btn-lg'
+                    (click)='openModal()'>Click to Open</button>
+                <div class='modal' tabindex='-1' role='dialog'>
+                    <div class='modal-dialog' role='document'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h4 class='modal-title'>Model Title</h4><button type='button' class='close'
+                                    aria-label='Close' (click)='onCloseHandled()'><span
+                                        aria-hidden='true'>&times;</span></button>
+                            </div>
+                            <div class='modal-body'>
+                                <p>Model body text</p>
+                            </div>
+                            <div class='modal-footer'><button type='button' class='btn btn-default'
+                                    (click)='onCloseHandled()'>Close</button></div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Progress Bar:
+            </td>
+            <td>
+                <div class='progress'>
+                    <div class='progress-bar' role='progress-bar' style='width: 25%' aria-valuenow='25'
+                        aria-valuemin='0' aria-valuemax='100'>25%</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Select
+            </td>
+            <td>
+                <select id='selectid' class='form-select' [multiple]='multiple'>
+                    <option value='1'>One</option>
+                    <option value='2'>Two</option>
+                    <option value='3'>Three</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Button:
+            </td>
+            <td>
+                <button class='btn btn-primary'>Primary Button</button>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Button Toggle:
+            </td>
+            <td>
+                <div class='btn-group' role='group'> <button type='button' class='btn btn-secondary'>Left</button>
+                    <button type='button' class='btn btn-secondary'>Middle</button><button type='button'
+                        class='btn btn-secondary'>Right</button></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Check box:
+            </td>
+            <td>
+                <input required (change)='onChange(box.value)' #box value='' type='checkbox' [checked]='checked' />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Radio:
+            </td>
+            <td>
+                <input required (change)='onChange(box.value)' #box value='' type='radio' [checked]='checked' />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Disabled Textarea
+            </td>
+            <td>
+                <textarea class='form-control' id='exampleTextarea' disabled></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Textarea
+            </td>
+            <td>
+                <textarea class='form-control' id='exampleTextarea' required [placeholder]='placeholder' type='text'
+                    maxlength="9" minlength="3"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                List
+            </td>
+            <td>
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Menu
+            </td>
+            <td>
+                <nav required class='navbar navbar-expand-lg navbar-dark bg-dark'>
+                    <div class='collapse navbar-collapse'>
+                        <div class='navbar-nav'>
+                            <a class='nav-item nav-link active' href="#">Home</a>
+                            <a class='nav-item nav-link active' href="#">About Us</a>
+                            <a class='nav-item nav-link disabled' href="#">Contact Us</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    More Information
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Send Feedback</a>
+                                    <a class="dropdown-item" href="#">Report Issue</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Others</a>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                </nav>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Tabs
+            </td>
+            <td>
+                <ul class='nav nav-tabs'>
+                    <li class='nav-item'><a class='nav-link active' aria-current='page' href='#'>Active</a></li>
+                    <li class='nav-item'><a class='nav-link' href='#'>Link</a></li>
+                    <li class='nav-item'><a class='nav-link' href='#'>Link</a></li>
+                    <li class='nav-item'><a class='nav-link disabled' href='#' tabindex='-1'
+                            aria-disabled='true'>Disabled</a></li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                grid-list
+            </td>
+            <td>
+                <div class='container my-container'>
+                    <div class='row my-row'>
+                        <div class='col-md-4 my-col'>Row 1 Col 1</div>
+                        <div class='col-md-8 my-col'>Row 1 Col 2</div>
+                    </div>
+                    <div class='row my-row'>
+                        <div class='col my-col'>Row 2 Col 1</div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Expansion Panel
+            </td>
+            <td>
+                <button type='button' data-toggle='collapse' data-target='#demo'>Click Here</button>
+                <div id='demo' class='collapse'>Your collapse code goes here</div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                Side nav
+            </td>
+            <td>
+                <div class="sidenav"><a href="#">About</a><br><a href="#">Services</a><br><a href="#">Clients</a><br><a
+                        href="#">Contact</a></div>
+                <div class="main">
+                    <p>Select from side navigation options for more information</p>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+</div>
