@@ -1,0 +1,165 @@
+<div class="p-3">
+    <div class="my-2">
+        <form>
+            <mat-form-field style="width:17%;margin-left: 1%;" appearance="fill">
+                <mat-label>Component</mat-label>
+                <mat-select name="component" (selectionChange)="onChange()" [(ngModel)]="selectedComponent">
+                    <mat-option *ngFor="let fields of fieldsList" [value]="fields">{{fields}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width:40%;margin-left: 1%;" [hidden]="hideEvent">
+                <mat-label>Events</mat-label>
+                <mat-select name="events" multiple [(ngModel)]="selectedEvents">
+                    <mat-option *ngFor="let events of eventList" [value]="events">{{events}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width:40%;margin-left: 1%;" appearance="fill" [hidden]="hideValidation">
+                <mat-label>Validation</mat-label>
+                <mat-select name="validation" multiple [(ngModel)]="selectedValidation">
+                    <mat-option *ngFor="let valid of validationList" [value]="valid">{{valid}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary" style="float:right;" type="button"
+                (click)="btnClick()">Submit</button>
+            <button mat-raised-button color="primary" style="float:right;" type="button"
+                (click)="btnNavigate()">Test</button>
+
+        </form>
+    </div>
+    <!---Code for table starts here-->
+    <div [hidden]="hideUserInput">
+        <form>
+            <label>Number of rows</label>
+            <input type="text" #row class="form-control">
+            <label>Number of columns</label>
+            <input type="text" #col class="form-control">
+            <button type="button" id="click" class="btn btn-primary" (click)="addTableControls(col.value,row.value)">Add
+                Components, Events and Validations</button>
+        </form>
+    </div>
+    <!-- <div *ngFor="let l of total;let i = index"> -->
+    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" [hidden]="hidetable">
+
+        <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="component">
+            <th mat-header-cell *matHeaderCellDef> Component </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-form-field style="width:100%;margin-left: 1%;" appearance="fill">
+                    <mat-label>Component</mat-label>
+                    <mat-select name="component" #selectedComp [(ngModel)]="element.isc"
+                        (ngModelChange)="updateEvents(selectedComp.value,element)">
+                        <mat-option *ngFor="let fields of element.sc" [value]="fields">{{fields}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="event">
+            <th mat-header-cell *matHeaderCellDef> Event </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-form-field style="width:100%;margin-left: 1%;" appearance="fill">
+                    <mat-label>Event</mat-label>
+                    <mat-select name="event" multiple [(ngModel)]="element.ise">
+                        <mat-option *ngFor="let fields of element.se" [value]="fields">{{fields}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="validation">
+            <th mat-header-cell *matHeaderCellDef> Validation </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-form-field style="width:100%;margin-left: 1%;" appearance="fill">
+                    <mat-label>Validation</mat-label>
+                    <mat-select name="validation" multiple [(ngModel)]="element.isv">
+                        <mat-option *ngFor="let fields of element.sv" [value]="fields">{{fields}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <!-- </div> -->
+
+    <!---Code for table ends here-->
+    <div *ngIf=testcases>
+        <app-test></app-test>
+    </div>
+
+    <br />
+    <div class="my-4">
+        <mat-tab-group>
+            <mat-tab label="HTML">
+                <pre>
+                                      <code>
+                                          {{htmlsnippet}}
+                                      </code>
+                                  </pre>
+            </mat-tab>
+            <mat-tab label="BOOTSTRAP HTML">
+                <pre>
+                                    <code>
+                                        {{bootstraphtmlsnippet}}
+                                    </code>
+                                </pre>
+            </mat-tab>
+            <mat-tab label="TS">
+                <pre>
+                                      <code [innerHTML]="tssnippet">
+                                      </code>
+                                  </pre>
+            </mat-tab>
+            <mat-tab label="SPEC TS">
+                <pre>
+                                      <code [innerHTML]="specsnippet">
+                                      </code>
+                                  </pre>
+            </mat-tab>
+            <mat-tab label="MATERIAL CSS">
+                <pre>
+                                          <code>
+                                              {{csssnippet}}
+                                          </code>
+                                      </pre>
+            </mat-tab>
+            <mat-tab label="BOOTSTRAP CSS">
+                <pre>
+                       <code>
+                               {{bscsssnippet}}
+                       </code>
+                                      </pre>
+              </mat-tab>
+        
+              <mat-tab label="TS MATERIAL">
+                <pre>
+                                          <code [innerHTML]="importsnippet">
+                                        </code>
+                                            <code [innerHTML]="tssnippet">
+                                            </code>
+                                            <code [innerHTML]="tscodesnippet">
+                                            </code>
+                                            
+                </pre>
+              </mat-tab>
+              <mat-tab label="TS BOOTSTRAP">
+                <pre>
+                                            <code [innerHTML]="tssnippet">
+                                            </code>
+                                            <code [innerHTML]="tscodesnippet">
+                                            </code>
+                </pre>
+              </mat-tab>
+        
+        </mat-tab-group>
+    </div>
