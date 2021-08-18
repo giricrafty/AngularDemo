@@ -1,17 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppLayoutComponent } from './component/layout/app-layout/app-layout.component';
-import { ListModuleComponent } from './component/list-module/list-module.component';
-
-const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-  {
-    path: '',
-    component: AppLayoutComponent,
-    children: [{
-      path: 'dashboard', component: ListModuleComponent
-    }]
-  }
+import { BootstrapTestComponentComponent } from './bootstrap-test-component/bootstrap-test-component.component';
+import { ControllersComponent } from './controllers/controllers.component';
+import { HtmlTestComponentComponent } from './html-test-component/html-test-component.component';
+const routes: Routes = [{ path: 'html-test', component: HtmlTestComponentComponent },
+ { path: 'bootstrap-test', component: BootstrapTestComponentComponent },
+ {path:'component', component:ControllersComponent}
 ];
 
 @NgModule({
@@ -19,3 +13,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
