@@ -11,8 +11,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  generateForm() {
-    window.open("file:///C:Test/test.bat");
-  }
+  
 
 }
