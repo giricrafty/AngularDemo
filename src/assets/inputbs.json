@@ -5,6 +5,7 @@
         "bootstraphtml":"<input #box  class='form-control' value=''/>",
         "import":"import {MatInputModule} from '@angular/material/input';",
         "tag":"input",
+        "bootstraptag":"input",
         "event":
         {           
             "keyup": "(keyup)='onKey(box.value)'",
@@ -99,13 +100,14 @@
     }, 
     "table":
     {                
-        
-        "html":"<table mat-table [dataSource]='dataSource' class='mat-elevation-z8'><ng-container matColumnDef='position'><th mat-header-cell *matHeaderCellDef> No. </th><td mat-cell *matCellDef='let element'> {{element.position}} </td></ng-container><ng-container matColumnDef='name'><th mat-header-cell *matHeaderCellDef> Name </th><td mat-cell *matCellDef='let element'> {{element.name}}</td></ng-container><ng-container matColumnDef='weight'><th mat-header-cell *matHeaderCellDef> Weight </th> <td mat-cell *matCellDef='let element'> {{element.weight}} </td></ng-container><tr mat-header-row *matHeaderRowDef='displayedColumns'></tr><tr mat-row *matRowDef='let row; columns: displayedColumns;'></tr></table>",
+        "html":"<table mat-table matSort [dataSource]='dataSource' class='mat-elevation-z8'>",
+        "column":"<ng-container matColumnDef='columnName'><th mat-header-cell *matHeaderCellDef>ColumnName</th><td mat-cell *matCellDef='let element'>",
+        "MaterialClosetag":"<tr mat-header-row *matHeaderRowDef='displayedColumns'></tr><tr mat-row *matRowDef='let row; columns: displayedColumns;'></tr></table> ",
         "bootstraphtml":"<table class='table table-bordered'>",
         "tag":"table",
-        "tscode":"export interface PeriodicElement { name: string;position: number; weight: number;symbol: string;}const ELEMENT_DATA: PeriodicElement[] = [{position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},{position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},];  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];dataSource = ELEMENT_DATA;",
+        "bootstraptag":"table",
+        "tscode":"displayedColumns: string[] = ['column1','column2','column3'];dataSource=['row1']",
         "import":"import {MatTableModule} from '@angular/material/table';",
-        "column":"<ng-container matColumnDef='position'><th mat-header-cell *matHeaderCellDef> No. </th><td mat-cell *matCellDef='let element'> {{element.position}} </td></ng-container><ng-container matColumnDef='name'><th mat-header-cell *matHeaderCellDef> Name </th><td mat-cell *matCellDef='let element'> {{element.name}} </td></ng-container><ng-container matColumnDef='weight'><th mat-header-cell *matHeaderCellDef> Weight </th><td mat-cell *matCellDef='let element'> {{element.weight}} </td></ng-container><ng-container matColumnDef='symbol'><th mat-header-cell *matHeaderCellDef> Symbol </th><td mat-cell *matCellDef='let element'> {{element.symbol}} </td></ng-container><tr mat-header-row *matHeaderRowDef='displayedColumns'></tr><tr mat-row *matRowDef='let row; columns: displayedColumns;'></tr></table>",       "bootstrapcolumn":"<thead><tr><thscope='col'>#</th><thscope='col'>First</th><thscope='col'>Last</th></tr></thead><tbody><tr><thscope='row'><select><optionvalue='1'>1</option><optionvalue='2'>2</option><optionvalue='3'>3</option><optionvalue='4'>4</option></select></th><td><labelfor='name'>Enter Username</label></td><td><inputtype='text'name='username'class='form-control'></td></tr><tr><thscope='row'><select><optionvalue='1'>1</option><optionvalue='2'>2</option><optionvalue='3'>3</option><optionvalue='4'>4</option></select></th><td><labelfor='name'>Enter Password</label></td><td><inputtype='password'name='username'class='form-control'></td></tr><tr><thscope='row'><select><optionvalue='1'>1</option><optionvalue='2'>2</option><optionvalue='3'>3</option><optionvalue='4'>4</option></select></th><td><labelfor='gender'>Gender</label></td><td><divclass='form-check'><inputclass='form-check-input'type='radio'name='exampleRadios'checked><labelclass='form-check-label'for='exampleRadios1'>Male</label></div><divclass='form-check'><inputclass='form-check-input'type='radio'name='exampleRadios'><labelclass='form-check-label'for='exampleRadios2'>Female</label></div></td></tr><tr><thscope='row'><select><optionvalue='1'>1</option><optionvalue='2'>2</option><optionvalue='3'>3</option><optionvalue='4'>4</option></select></th><td><ul><li>Admin</li><li>User</li><li>DBA</li></ul></td><td><buttontype='button'>Save</button></td></tbody>",
         "event":
         {          
             "sort": "matSort",
@@ -210,9 +212,9 @@
     "select": {
         "html": "<mat-form-field appearance='fill'><mat-label>Gender</mat-label><mat-select><mat-option>Male</mat-option><mat-option>Female</mat-option></mat-select></mat-form-field>",
         "bootstraphtml":"<select id='selectid' class='form-select' [multiple]='multiple' [arialabel]='arialabel'><option value=''></option></select>",
-        "tag":"select",
+        "tag":"mat-form-field",
         "import":"import {MatSelectModule} from '@angular/material/select';",
-        "bootstraptag":"mat-select",
+        "bootstraptag":"select",
         "event": {
             "change": "(change)='onChangeSelect($event.target.value)'"
         },
@@ -267,8 +269,9 @@
     },
     "checkbox":{
         "html":" <mat-checkbox>Check me!</mat-checkbox>",
+        "tag":"mat-checkbox",
         "bootstraphtml":"<input #box value='' type='checkbox' [checked]='checked'/>",
-        "tag":"input",
+        "bootstraptag":"input",
         "import":"import {MatCheckboxModule} from '@angular/material/checkbox';",
         "event": {
         "change": "(change)='onChange(box.value)'"
@@ -289,6 +292,7 @@
         "html":"<input #box matInput value='' type='radio'/>",
         "bootstraphtml":"<input #box value='' type='radio' [checked]='checked'/>",
         "tag":"input",
+        "bootstraptag":"input",
         "import":"import {MatRadioModule} from '@angular/material/radio';",
         "event": {
             "change": "(change)='onChange(box.value)'"
@@ -309,6 +313,7 @@
         "html":"<textarea type='text' id='form7' class='md-textarea form-control' mdbInput></textarea><label for='form7'>Basic textarea</label>",
         "bootstraphtml": "<textarea class='form-control' id='exampleTextarea'></textarea>",
         "tag": "textarea",
+        "bootstraptag":"textarea",
         "event": {
             "keyup": "(keyup)='onKey(box.value)'",
             "keyupenter": "(keyup.enter)='onKeyEnter(box.value)'",
@@ -326,10 +331,10 @@
             "email":"pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$'"
         },
         "unittest": {
-            "change": "it('should be input identification', () => {​​​​​​​​ const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => {​​​​​​​​ spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }​​​​​​​​) }​​​​​​​​)"
+            "change": "it('should be input identification', () => {const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => {​​​​​​​​ spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }​​​​​​​​) }​​​​​​​​)"
         },
         "ts": {
-            "change": "onChange(boxvalue:string){​​​​​​​​console.log('onChange = ' +boxvalue);}​​​​​​​​"
+            "change": "onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
         }
     },
     "list": {
@@ -447,6 +452,7 @@
         "html": "<mat-sidenav-container><mat-sidenav #sidenav='matSidenav' class='mat-elevation-z8'><button mat-button class='menu-button'><mat-icon>home</mat-icon><span>Home</span></button><button mat-button class='menu-button'><mat-icon>person</mat-icon><span>Profile</span></button><button mat-button class='menu-button'><mat-icon>info</mat-icon><span>About</span></button><mat-divider></mat-divider><button mat-button class='menu-button'><mat-icon>help</mat-icon><span>Help</span></button></mat-sidenav><mat-sidenav-content><div class='content mat-elevation-z8'>Main content here!</div></mat-sidenav-content></mat-sidenav-container>",        
         "bootstraphtml":"<div class='sidenav'><a href='#'>About</a><a href='#''>Services</a><a href='#''>Clients</a><a href='#''>Contact</a></div>",
         "tag": "mat-sidenav",
+        "bootstraptag":"div",
         "import":"import {MatSidenavModule} from '@angular/material/sidenav';",
         "css":"mat-sidenav { margin: 16px;width: 200px; border-right: none; background: #002b5c;color: white;border-radius: 10px;padding: 16px;text-align: center;}.content {height: calc(100vh - 98px);border-radius: 10px;margin: 16px;margin-left: 32px;display: flex;justify-content: center;align-items: center;font-size: 2rem;color: lightgray;}.menu-button {width: 100%;display: flex;align-items: center;justify-content: flex-start;font-size: 1rem;mat-icon {margin-right: 8px;}}.name {margin-top: 8px;font-weight: normal;}.designation { margin-top: 2px; font-size: 0.7rem; color: lightgrey;}mat-divider {margin-top: 16px;margin-bottom: 16px;background-color: rgba(255, 255, 255, 0.5);}mat-sidenav-container { height: calc(100vh - 65px);}",
         "tscode":" @ViewChild(MatSidenav)sidenav!: MatSidenav;ngAfterViewInit(){this.observer.observe(['(max-width: 800px)']).subscribe((res) => {if (res.matches) {this.sidenav.mode = 'over';this.sidenav.close();} else {this.sidenav.mode = 'side';this.sidenav.open();}});}",
