@@ -46,6 +46,10 @@ export class ControllersComponent implements OnInit {
   inputfields: TestElement[] = [];
   selectedComponent: string = "";
   selectedEvent: string = "";
+  columnSnippet:string="";
+  materialCloseTag:string="";
+  materialCloseTagSnippet:string="";
+  materialTableSnippet:string="";
   selectedValidation: string = "";
   htmlsnippet: string = "";
   subComponentSnipped: string = "";
@@ -60,8 +64,10 @@ export class ControllersComponent implements OnInit {
   tscodesnippet: string = "";
   importsnippet: string = "";
   bshtmlsnippet: string = "";
+  subcomponentTag:string="";
   tag: any;
   tableHtml: string = "";
+  tableCode:string="";
   specsnippet: string = "";
   hidetable: boolean = true;
   hideValidation: boolean = false;
@@ -111,15 +117,16 @@ export class ControllersComponent implements OnInit {
       this.validationList = Object.keys(this.template[this.selectedComponent]["validation"]);
     }
   }
-  btnNavigate() {
-    this.testcases = !this.testcases;
-  }
+  
   btnClick() {
     this.htmlsnippet = JSON.stringify(this.template[this.selectedComponent]["html"]);
     this.bootstraphtmlsnippet = JSON.stringify(this.template[this.selectedComponent]["bootstraphtml"]);
     console.log(this.htmlsnippet);
+    console.log(this.bootstraphtmlsnippet);
     if (this.selectedComponent == "table") {
-      this.htmlsnippet = JSON.stringify(this.template[this.selectedComponent]["bootstraphtml"]);
+      this.htmlsnippet = JSON.stringify(this.template[this.selectedComponent]["html"]);
+      this.columnSnippet=JSON.stringify(this.template[this.selectedComponent]["column"]);
+      this.materialCloseTag= JSON.stringify(this.template[this.selectedComponent]["MaterialClosetag"]);
       let tsTemplate: string = "";
       let specTemplate: string = "";
       let controller: string = "";
@@ -128,18 +135,22 @@ export class ControllersComponent implements OnInit {
         this.subComponentSnippedBs = "";
         let id = this.dataSource[i].id;
         let controller = this.dataSource[i].isc;
-        let subControllers: string = "";
+        console.log(controller)
         this.subEvents = "";
         this.subValidation = "";
         this.tag = "";
         this.subComponentSnipped = this.subComponentSnipped + " " + JSON.stringify(this.template[this.dataSource[i].isc]["html"]);
+        console.log(this.subComponentSnipped);
+        this.subcomponentTag=JSON.stringify(this.template[this.selectedComponent]["tag"]);
+        console.log(this.subcomponentTag);
         this.subEvents = this.subEvents + " " + JSON.stringify(this.template[this.dataSource[i].isc]["event"][this.dataSource[i].ise[0]]);
         console.log(this.subEvents);
         this.subComponentSnipped = this.subComponentSnipped.replace("<" + controller, "<" + controller + this.subEvents);
         this.subValidation = this.subValidation + " " + JSON.stringify(this.template[this.dataSource[i].isc]["validation"][this.dataSource[i].isv[0]]);
         this.subComponentSnipped = this.subComponentSnipped.replace("<" + controller, "<" + controller + this.subValidation);
         console.log(this.subComponentSnipped)
-
+        this.tableCode = this.tableCode + this.columnSnippet + this.subComponentSnipped + "</td></ng-container>"
+        console.log(this.tableCode)
         this.tableHtml = this.tableHtml + "<tr class='row-span'><td>" + this.subComponentSnipped + "</td></tr>";
         console.log(this.tableHtml)
         //TS template and SPEC template
@@ -149,6 +160,10 @@ export class ControllersComponent implements OnInit {
       console.log(this.tableHtml)
       let bootstrapHtmlTemplate = this.tableHtml.split('>').join(">\n");
       console.log(bootstrapHtmlTemplate);
+      let materialTableTemplate = this.htmlsnippet+ this.tableCode + this.materialCloseTag;
+      this.htmlsnippet= materialTableTemplate.split(">").join(">\n");
+      this.htmlsnippet=this.htmlsnippet.split("\"").join("");
+      console.log(this.htmlsnippet)
       this.bootstraphtmlsnippet = bootstrapHtmlTemplate.split("\"").join("");
       tsTemplate = tsTemplate.split("\"").join("<br/>");
       this.tssnippet = tsTemplate;
@@ -200,14 +215,14 @@ export class ControllersComponent implements OnInit {
     }
     let cssTmpt=JSON.stringify(this.template[this.selectedComponent]["css"]);
 
-    this.csssnippet = cssTmpt.split("\"").join("");
-    console.log(this.csssnippet)
+    this.csssnippet = cssTmpt;
+    //console.log(this.csssnippet)
     //this.bshtmlsnippet = JSON.stringify(this.template[this.selectedComponent]["bootstraphtml"]);
     let bscssTmp=JSON.stringify(this.template[this.selectedComponent]["bootstrapcss"]);
-    this.bscsssnippet = bscssTmp.split("\"").join("");
-    console.log(this.bscsssnippet);
+    this.bscsssnippet = bscssTmp;
+    //console.log(this.bscsssnippet);
     this.tscodesnippet=JSON.stringify(this.template[this.selectedComponent]["tscode"]);
-   // this.tscodesnippet = tscodeTmp.split("\"").join("");
+    //this.tscodesnippet = tscodeTmp.split("\"").join("");
     //console.log(this.tscodesnippet);
     let importTmpt=JSON.stringify(this.template[this.selectedComponent]["import"]);
     this.importsnippet =importTmpt.split(";").join(";\n");
@@ -235,13 +250,11 @@ export class ControllersComponent implements OnInit {
     console.log(isv)//selected controllers validations
     console.log(ise)//selected controllers events
   }
-  addTableControls(row: any, col: any) {
-    console.log(row, col)
+  addTableControls(row: any) {
+    console.log(row)
     this.hidetable = false;
-    this.total1 = (row * col);
-    console.log(this.total1)
     let isc = Object.keys(this.template);
-    for (let n = 1; n <= this.total1; n++) {
+    for (let n = 1; n <= row; n++) {
       const td: TestElement = {
         id: n,
         isc: "",
