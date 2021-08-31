@@ -1,5 +1,11 @@
+<br>
+<mat-radio-group aria-label="Select an option" class='radio-div' (change)="radioButtonChanged($event);">
+    <mat-radio-button value="material">Angular Material</mat-radio-button>
+    <mat-radio-button value="bootstrap">Bootstrap </mat-radio-button>
+  </mat-radio-group>
+
 <div class="p-3">
-    <div class="my-2">
+    <div class="my-2" [hidden]="hideCompTab">
         <form>
             <mat-form-field style="width:17%;margin-left: 1%;" appearance="fill">
                 <mat-label>Component</mat-label>
@@ -56,7 +62,7 @@
                     </mat-select>
                 </mat-form-field>
             </td>
-        </ng-container>        
+        </ng-container>
         <ng-container matColumnDef="event">
             <th mat-header-cell *matHeaderCellDef> Event </th>
             <td mat-cell *matCellDef="let element">
@@ -69,7 +75,7 @@
             </td>
         </ng-container>
 
-        
+
         <ng-container matColumnDef="validation">
             <th mat-header-cell *matHeaderCellDef> Validation </th>
             <td mat-cell *matCellDef="let element">
@@ -90,9 +96,7 @@
     <div *ngIf=testcases>
         <app-test></app-test>
     </div>
-
-    <br />
-    <div class="my-4">
+    <div class="my-4" [hidden] ="hideTabMat">
         <mat-tab-group>
             <mat-tab label="HTML">
                 <pre>
@@ -101,7 +105,45 @@
                                       </code>
                                   </pre>
             </mat-tab>
-            <mat-tab label="BOOTSTRAP HTML">
+           
+            <mat-tab label="TS">
+                <pre>
+                                      <code [innerHTML]="tssnippet">
+                                      </code>
+                                  </pre>
+            </mat-tab>
+            <mat-tab label="SPEC TS">
+                <pre>
+                                      <code [innerHTML]="specsnippet">
+                                      </code>
+                                  </pre>
+            </mat-tab>
+            <mat-tab label="CSS">
+                <pre>
+                                          <code>
+                                              {{csssnippet}}
+                                          </code>
+                                      </pre>
+            </mat-tab>
+            
+        
+              <mat-tab label="TS CODE">
+                <pre>
+                                          <code [innerHTML]="importsnippet">
+                                        </code>
+                                           
+                                            <code [innerHTML]="tscodesnippet">
+                                            </code>
+                                            
+                </pre>
+              </mat-tab>
+              
+        </mat-tab-group>
+    </div>
+    <div class="my-4" [hidden]="hideBootTab">
+        <mat-tab-group>
+            
+            <mat-tab label="HTML">
                 <pre>
                                     <code>
                                         {{bootstraphtmlsnippet}}
@@ -120,14 +162,8 @@
                                       </code>
                                   </pre>
             </mat-tab>
-            <mat-tab label="MATERIAL CSS">
-                <pre>
-                                          <code>
-                                              {{csssnippet}}
-                                          </code>
-                                      </pre>
-            </mat-tab>
-            <mat-tab label="BOOTSTRAP CSS">
+           
+            <mat-tab label="CSS">
                 <pre>
                        <code>
                                {{bscsssnippet}}
@@ -135,20 +171,10 @@
                                       </pre>
               </mat-tab>
         
-              <mat-tab label="TS MATERIAL">
+              
+              <mat-tab label="TS CODE">
                 <pre>
-                                          <code [innerHTML]="importsnippet">
-                                        </code>
-                                            <code [innerHTML]="tssnippet">
-                                            </code>
-                                            <code [innerHTML]="tscodesnippet">
-                                            </code>
-                                            
-                </pre>
-              </mat-tab>
-              <mat-tab label="TS BOOTSTRAP">
-                <pre>
-                                            <code [innerHTML]="tssnippet">
+                                             <code [innerHTML]="importsnippet">
                                             </code>
                                             <code [innerHTML]="tscodesnippet">
                                             </code>
@@ -156,3 +182,5 @@
               </mat-tab>
         </mat-tab-group>
     </div>
+    <br/>
+    
