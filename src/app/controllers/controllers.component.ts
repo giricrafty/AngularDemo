@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatSidenav } from '@angular/material/sidenav';
+//import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { MatRadioChange } from '@angular/material/radio';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -46,10 +47,18 @@ export class ControllersComponent implements OnInit {
   inputfields: TestElement[] = [];
   selectedComponent: string = "";
   selectedEvent: string = "";
-  columnSnippet:string="";
-  materialCloseTag:string="";
-  materialCloseTagSnippet:string="";
-  materialTableSnippet:string="";
+  //For Radio Change
+   hideTabMat:boolean=true;
+   hideBootTab:boolean=true;
+   hideCompTab:boolean=true;
+   
+   
+ 
+ 
+  columnSnippet: string = "";
+  materialCloseTag: string = "";
+  materialCloseTagSnippet: string = "";
+  materialTableSnippet: string = "";
   selectedValidation: string = "";
   htmlsnippet: string = "";
   subComponentSnipped: string = "";
@@ -64,10 +73,11 @@ export class ControllersComponent implements OnInit {
   tscodesnippet: string = "";
   importsnippet: string = "";
   bshtmlsnippet: string = "";
-  subcomponentTag:string="";
+  subcomponentTag: string = "";
   tag: any;
+  subcomponentTag2: string = "";
   tableHtml: string = "";
-  tableCode:string="";
+  tableCode: string = "";
   specsnippet: string = "";
   hidetable: boolean = true;
   hideValidation: boolean = false;
@@ -117,7 +127,6 @@ export class ControllersComponent implements OnInit {
       this.validationList = Object.keys(this.template[this.selectedComponent]["validation"]);
     }
   }
-  
   btnClick() {
     this.htmlsnippet = JSON.stringify(this.template[this.selectedComponent]["html"]);
     this.bootstraphtmlsnippet = JSON.stringify(this.template[this.selectedComponent]["bootstraphtml"]);
@@ -125,44 +134,46 @@ export class ControllersComponent implements OnInit {
     console.log(this.bootstraphtmlsnippet);
     if (this.selectedComponent == "table") {
       this.htmlsnippet = JSON.stringify(this.template[this.selectedComponent]["html"]);
-      this.columnSnippet=JSON.stringify(this.template[this.selectedComponent]["column"]);
-      this.materialCloseTag= JSON.stringify(this.template[this.selectedComponent]["MaterialClosetag"]);
+      this.columnSnippet = JSON.stringify(this.template[this.selectedComponent]["column"]);
+      this.materialCloseTag = JSON.stringify(this.template[this.selectedComponent]["MaterialClosetag"]);
       let tsTemplate: string = "";
       let specTemplate: string = "";
-      let controller: string = "";
+      //let controller: string = "";
       for (let i = 0; i < this.dataSource.length; i++) {
         this.subComponentSnipped = "";
         this.subComponentSnippedBs = "";
         let id = this.dataSource[i].id;
         let controller = this.dataSource[i].isc;
-        console.log(controller)
         this.subEvents = "";
         this.subValidation = "";
         this.tag = "";
         this.subComponentSnipped = this.subComponentSnipped + " " + JSON.stringify(this.template[this.dataSource[i].isc]["html"]);
         console.log(this.subComponentSnipped);
-        this.subcomponentTag=JSON.stringify(this.template[this.selectedComponent]["tag"]);
+        this.subcomponentTag =  (JSON.stringify(this.template[this.dataSource[i].isc]["tag"])).split("\"").join("");
         console.log(this.subcomponentTag);
-        this.subEvents = this.subEvents + " " + JSON.stringify(this.template[this.dataSource[i].isc]["event"][this.dataSource[i].ise[0]]);
+        this.subEvents = this.subEvents + " "+ JSON.stringify(this.template[this.dataSource[i].isc]["event"][this.dataSource[i].ise[0]]);
         console.log(this.subEvents);
-        this.subComponentSnipped = this.subComponentSnipped.replace("<" + controller, "<" + controller + this.subEvents);
+        this.subComponentSnipped = this.subComponentSnipped.replace("<" + this.subcomponentTag, "<" + this.subcomponentTag + this.subEvents);
+        console.log(this.subComponentSnipped)
         this.subValidation = this.subValidation + " " + JSON.stringify(this.template[this.dataSource[i].isc]["validation"][this.dataSource[i].isv[0]]);
-        this.subComponentSnipped = this.subComponentSnipped.replace("<" + controller, "<" + controller + this.subValidation);
+        this.subComponentSnipped = this.subComponentSnipped.replace("<" + this.subcomponentTag, "<" + this.subcomponentTag + this.subValidation);
         console.log(this.subComponentSnipped)
         this.tableCode = this.tableCode + this.columnSnippet + this.subComponentSnipped + "</td></ng-container>"
         console.log(this.tableCode)
         this.tableHtml = this.tableHtml + "<tr class='row-span'><td>" + this.subComponentSnipped + "</td></tr>";
         console.log(this.tableHtml)
         //TS template and SPEC template
-        tsTemplate = tsTemplate + " " + JSON.stringify(this.template[this.dataSource[i].isc]["event"][this.dataSource[i].ise[i]]);
+        tsTemplate = tsTemplate +" "+ JSON.stringify(this.template[this.dataSource[i].isc]["event"][this.dataSource[i].ise[0]]);
+        console.log(tsTemplate)
       }
-      this.tableHtml = this.tableHtml.replace(this.tableHtml, this.htmlsnippet + this.tableHtml + "</table");
+      this.tableHtml = this.tableHtml.replace(this.tableHtml, this.bootstraphtmlsnippet + this.tableHtml + "</table");
       console.log(this.tableHtml)
-      let bootstrapHtmlTemplate = this.tableHtml.split('>').join(">\n");
+
+      let bootstrapHtmlTemplate = this.tableHtml.split('<').join("\n<");
       console.log(bootstrapHtmlTemplate);
-      let materialTableTemplate = this.htmlsnippet+ this.tableCode + this.materialCloseTag;
-      this.htmlsnippet= materialTableTemplate.split(">").join(">\n");
-      this.htmlsnippet=this.htmlsnippet.split("\"").join("");
+      let materialTableTemplate = this.htmlsnippet + this.tableCode + this.materialCloseTag;
+      this.htmlsnippet = materialTableTemplate.split('<').join("\n<");
+      this.htmlsnippet = this.htmlsnippet.split("\"").join("");
       console.log(this.htmlsnippet)
       this.bootstraphtmlsnippet = bootstrapHtmlTemplate.split("\"").join("");
       tsTemplate = tsTemplate.split("\"").join("<br/>");
@@ -213,19 +224,19 @@ export class ControllersComponent implements OnInit {
       this.bootstraphtmlsnippet = bootstrapHtmlTemplate;
       console.log(this.htmlsnippet)
     }
-    let cssTmpt=JSON.stringify(this.template[this.selectedComponent]["css"]);
+    let cssTmpt = JSON.stringify(this.template[this.selectedComponent]["css"]);
 
-    this.csssnippet = cssTmpt;
-    //console.log(this.csssnippet)
+    this.csssnippet = cssTmpt.split("\"").join("");
+    console.log(this.csssnippet)
     //this.bshtmlsnippet = JSON.stringify(this.template[this.selectedComponent]["bootstraphtml"]);
-    let bscssTmp=JSON.stringify(this.template[this.selectedComponent]["bootstrapcss"]);
+    let bscssTmp = JSON.stringify(this.template[this.selectedComponent]["bootstrapcss"]);
     this.bscsssnippet = bscssTmp;
     //console.log(this.bscsssnippet);
-    this.tscodesnippet=JSON.stringify(this.template[this.selectedComponent]["tscode"]);
+    this.tscodesnippet = JSON.stringify(this.template[this.selectedComponent]["tscode"]);
     //this.tscodesnippet = tscodeTmp.split("\"").join("");
-    //console.log(this.tscodesnippet);
-    let importTmpt=JSON.stringify(this.template[this.selectedComponent]["import"]);
-    this.importsnippet =importTmpt.split(";").join(";\n");
+    console.log(this.tscodesnippet);
+    let importTmpt = JSON.stringify(this.template[this.selectedComponent]["import"]);
+    this.importsnippet = importTmpt.split(";").join(";\n");
     console.log(this.importsnippet)
   }
   updateEvents(value: string, row: TestElement): void {
@@ -250,6 +261,19 @@ export class ControllersComponent implements OnInit {
     console.log(isv)//selected controllers validations
     console.log(ise)//selected controllers events
   }
+  radioButtonChanged(rd:MatRadioChange)
+   {
+     console.log("Radio Value",rd.value)
+     if(rd.value =="material"){
+      this.hideCompTab=false;
+      this.hideTabMat=false;
+      this.hideBootTab=true;
+     }else{
+       this.hideTabMat=true;
+      this.hideCompTab=false;
+      this.hideBootTab=false;
+     }
+   }
   addTableControls(row: any) {
     console.log(row)
     this.hidetable = false;
