@@ -103,7 +103,7 @@
         "html":"<table mat-table matSort [dataSource]='dataSource' class='mat-elevation-z8'>",
         "column":"<ng-container matColumnDef='columnName'><th mat-header-cell *matHeaderCellDef>ColumnName</th><td mat-cell *matCellDef='let element'>",
         "MaterialClosetag":"<tr mat-header-row *matHeaderRowDef='displayedColumns'></tr><tr mat-row *matRowDef='let row; columns: displayedColumns;'></tr></table> ",
-        "bootstraphtml":"<table class='table table-bordered'>",
+        "bootstraphtml":"<table class='table'> <thead class='thead-dark'><tr><th scope='col'>Column1</th></tr></thead>",
         "tag":"table",
         "bootstraptag":"table",
         "tscode":"displayedColumns: string[] = ['column1','column2','column3'];dataSource=['row1']",
@@ -331,10 +331,10 @@
             "email":"pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$'"
         },
         "unittest": {
-            "change": "it('should be input identification', () => {const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => {​​​​​​​​ spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }​​​​​​​​) }​​​​​​​​)"
+            "change": "it('should be input identification', () => {​​​​​​​​ const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => {​​​​​​​​ spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }​​​​​​​​) }​​​​​​​​)"
         },
         "ts": {
-            "change": "onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
+            "change": "onChange(boxvalue:string){​​​​​​​​console.log('onChange = ' +boxvalue);}​​​​​​​​"
         }
     },
     "list": {
