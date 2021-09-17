@@ -2,3 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+pre code {
+    font-size: inherit;
+    color: inherit;
+    word-break: normal;
+    float: left !important;
+}
