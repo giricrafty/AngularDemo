@@ -1,186 +1,283 @@
-<br>
-<mat-radio-group aria-label="Select an option" class='radio-div' (change)="radioButtonChanged($event);">
-    <mat-radio-button value="material">Angular Material</mat-radio-button>
-    <mat-radio-button value="bootstrap">Bootstrap </mat-radio-button>
-  </mat-radio-group>
+<br />
+<mat-radio-group
+  aria-label="Select an option"
+  class="radio-div"
+  (change)="radioButtonChanged($event)"
+>
+  <mat-radio-button value="material">Angular Material</mat-radio-button>
+  <mat-radio-button value="bootstrap">Bootstrap </mat-radio-button>
+</mat-radio-group>
 
 <div class="p-3">
-    <div class="my-2" [hidden]="hideCompTab">
-        <form>
-            <mat-form-field style="width:17%;margin-left: 1%;" appearance="fill">
-                <mat-label>Component</mat-label>
-                <mat-select name="component" (selectionChange)="onChange()" [(ngModel)]="selectedComponent">
-                    <mat-option *ngFor="let fields of fieldsList" [value]="fields">{{fields}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field style="width:40%;margin-left: 1%;" [hidden]="hideEvent">
-                <mat-label>Events</mat-label>
-                <mat-select name="events" multiple [(ngModel)]="selectedEvents">
-                    <mat-option *ngFor="let events of eventList" [value]="events">{{events}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field style="width:40%;margin-left: 1%;" appearance="fill" [hidden]="hideValidation">
-                <mat-label>Validation</mat-label>
-                <mat-select name="validation" multiple [(ngModel)]="selectedValidation">
-                    <mat-option *ngFor="let valid of validationList" [value]="valid">{{valid}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <button mat-raised-button color="primary" style="float:right;" type="button"
-                (click)="btnClick()">Submit</button>
-        </form>
-    </div>
-    <!---Code for table starts here-->
-    <div [hidden]="hideUserInput">
-        <form>
-            <label>Number of rows</label>
-            <input type="text" #row class="form-control">
-            <br>
-            <button type="button" id="click" class="btn btn-primary" (click)="addTableControls(row.value)">Add
-                Components, Events and Validations</button>
-        </form>
-    </div>
-    <!-- <div *ngFor="let l of total;let i = index"> -->
-    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" [hidden]="hidetable">
+  <div class="my-2" [hidden]="hideCompTab">
+    <form>
+      <mat-form-field style="width: 17%; margin-left: 1%" appearance="fill">
+        <mat-label>Component</mat-label>
+        <mat-select
+          name="component"
+          (selectionChange)="onChange()"
+          [(ngModel)]="selectedComponent"
+        >
+          <mat-option *ngFor="let fields of fieldsList" [value]="fields">{{
+            fields
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 40%; margin-left: 1%" [hidden]="hideEvent">
+        <mat-label>Events</mat-label>
+        <mat-select name="events" multiple [(ngModel)]="selectedEvents">
+          <mat-option *ngFor="let events of eventList" [value]="events">{{
+            events
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        style="width: 40%; margin-left: 1%"
+        appearance="fill"
+        [hidden]="hideValidation"
+      >
+        <mat-label>Validation</mat-label>
+        <mat-select name="validation" multiple [(ngModel)]="selectedValidation">
+          <mat-option *ngFor="let valid of validationList" [value]="valid">{{
+            valid
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        style="float: right"
+        type="button"
+        (click)="btnClick()"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+  <!---Code for table starts here-->
+<div [hidden]="hideUserInput">
+<form>
+<div class="form-group col-lg-1">
+<label>Number of rows</label>
+ <input type="text" #row class="form-control sm" (input)="addTableControls(row.value)"> 
+</div>
+<br>
+ <!-- <button type="button" id="click" class="btn btn-primary" (click)="addTableControls(row.value)">Add
+                Components, Events and Validations</button> -->
+</form>
+</div>
 
-        <!--- Note that these columns can be defined in any order.
+
+  <!-- <div *ngFor="let l of total;let i = index"> -->
+  <table
+    mat-table
+    matSort
+    [dataSource]="dataSource"
+    class="mat-elevation-z8"
+    [hidden]="hidetable"
+  >
+    <!--- Note that these columns can be defined in any order.
                       The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="component">
-            <th mat-header-cell *matHeaderCellDef> Component </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-form-field style="width:100%;margin-left: 1%;" appearance="fill">
-                    <mat-label>Component</mat-label>
-                    <mat-select name="component" #selectedComp [(ngModel)]="element.isc"
-                        (ngModelChange)="updateEvents(selectedComp.value,element)">
-                        <mat-option *ngFor="let fields of element.sc" [value]="fields">{{fields}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="event">
-            <th mat-header-cell *matHeaderCellDef> Event </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-form-field style="width:100%;margin-left: 1%;" appearance="fill">
-                    <mat-label>Event</mat-label>
-                    <mat-select name="event" multiple [(ngModel)]="element.ise">
-                        <mat-option *ngFor="let fields of element.se" [value]="fields">{{fields}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="component">
+      <th mat-header-cell *matHeaderCellDef>Component</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field style="width: 100%; margin-left: 1%" appearance="fill">
+          <mat-label>Component</mat-label>
+          <mat-select
+            name="component"
+            #selectedComp
+            [(ngModel)]="element.isc"
+            (ngModelChange)="updateEvents(selectedComp.value, element)"
+          >
+            <mat-option *ngFor="let fields of element.sc" [value]="fields">{{
+              fields
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="event">
+      <th mat-header-cell *matHeaderCellDef>Event</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field style="width: 100%; margin-left: 1%" appearance="fill">
+          <mat-label>Event</mat-label>
+          <mat-select name="event" multiple [(ngModel)]="element.ise">
+            <mat-option *ngFor="let fields of element.se" [value]="fields">{{
+              fields
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
 
+    <ng-container matColumnDef="validation">
+      <th mat-header-cell *matHeaderCellDef>Validation</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field style="width: 100%; margin-left: 1%" appearance="fill">
+          <mat-label>Validation</mat-label>
+          <mat-select name="validation" multiple [(ngModel)]="element.isv">
+            <mat-option *ngFor="let fields of element.sv" [value]="fields">{{
+              fields
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <!-- </div> -->
 
-        <ng-container matColumnDef="validation">
-            <th mat-header-cell *matHeaderCellDef> Validation </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-form-field style="width:100%;margin-left: 1%;" appearance="fill">
-                    <mat-label>Validation</mat-label>
-                    <mat-select name="validation" multiple [(ngModel)]="element.isv">
-                        <mat-option *ngFor="let fields of element.sv" [value]="fields">{{fields}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <!-- </div> -->
-
-    <!---Code for table ends here-->
-    <div *ngIf=testcases>
-        <app-test></app-test>
-    </div>
-    <div class="my-4" [hidden] ="hideTabMat">
-        <mat-tab-group>
-            <mat-tab label="HTML">
-                <pre>
+  <!---Code for table ends here-->
+  <div *ngIf="testcases">
+    <app-test></app-test>
+  </div>
+  <div class="my-4" [hidden]="hideTabMat">
+    <mat-tab-group>
+      <mat-tab label="HTML">
+        <pre>
                                       <code>
                                           {{htmlsnippet}}
                                       </code>
+                                      <i class="fa fa-copy font-c" (click)="copyText(htmlsnippet)"	
+                                      *ngIf="copyIcon" title="Copy Code"></i>
                                   </pre>
-            </mat-tab>
-           
-            <mat-tab label="TS">
-                <pre>
+      </mat-tab>
+
+      <mat-tab label="TS">
+        <pre>
                                       <code [innerHTML]="tssnippet">
                                       </code>
+                                      <span *ngIf="tssnippet">	
+                                        <i class="fa fa-copy font-c" (click)="copyText(tssnippet)"	
+                                        *ngIf="copyIcon" title="Copy Code"></i>	
+                                     </span>
                                   </pre>
-            </mat-tab>
-            <mat-tab label="SPEC TS">
-                <pre>
+      </mat-tab>
+      <mat-tab label="SPEC TS">
+        <pre>
                                       <code [innerHTML]="specsnippet">
                                       </code>
+                                      <span *ngIf="specsnippet">	
+                                        <i class="fa fa-copy font-c" (click)="copyText(specsnippet)"	
+                                        *ngIf="copyIcon" title="Copy Code"></i>	
+                                     </span>
                                   </pre>
-            </mat-tab>
-            <mat-tab label="CSS">
-                <pre>
+      </mat-tab>
+      <mat-tab label="CSS">
+        <pre>
                                           <code>
                                               {{csssnippet}}
                                           </code>
+                                          <span *ngIf="csssnippet">	
+                                            <i class="fa fa-copy font-c" (click)="copyText(csssnippet)"	
+                                            *ngIf="copyIcon" title="Copy Code"></i>	
+                                         </span>
                                       </pre>
-            </mat-tab>
-            
-        
-              <mat-tab label="TS CODE">
-                <pre>
+      </mat-tab>
+
+      <mat-tab label="TS CODE">
+        <pre>
                                           <code [innerHTML]="importsnippet">
                                         </code>
+                                        <span *ngIf="importsnippet">	
+                                            <i class="fa fa-copy font-c" (click)="copyText(importsnippet)"	
+                                            *ngIf="copyIcon" title="Copy Code"></i>	
+                                         </span>
                                            
                                             <code [innerHTML]="tscodesnippet">
                                             </code>
+                                            <span *ngIf="tscodesnippet">	
+                                                <i class="fa fa-copy font-c" (click)="copyText(tscodesnippet)"	
+                                                *ngIf="copyIcon" title="Copy Code"></i>	
+                                             </span>
                                             
                 </pre>
-              </mat-tab>
-              
-        </mat-tab-group>
-    </div>
-    <div class="my-4" [hidden]="hideBootTab">
-        <mat-tab-group>
-            
-            <mat-tab label="HTML">
-                <pre>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="my-4" [hidden]="hideBootTab">
+    <mat-tab-group>
+      <mat-tab label="HTML">
+        <!-- <p style="text-align: center; padding: 38px">
+          {{ bootstraphtmlsnippet }} &nbsp;&nbsp;
+          <i
+            class="fa fa-copy font-c"
+            (click)="copyText(bootstraphtmlsnippet)"
+            *ngIf="copyIcon"
+            title="Copy Code"
+          ></i>
+        </p> -->
+        <pre>
                                     <code>
                                         {{bootstraphtmlsnippet}}
-                                    </code>
+                                    </code>    
+                                        <span *ngIf="bootstraphtmlsnippet">	
+                                            <i class="fa fa-copy font-c" (click)="copyText(bootstraphtmlsnippet)"	
+                                            *ngIf="copyIcon" title="Copy Code"></i>	
+                                         </span>
+                                    
                                 </pre>
-            </mat-tab>
-            <mat-tab label="TS">
-                <pre>
+      </mat-tab>
+      <mat-tab label="TS">
+        <pre>
                                       <code [innerHTML]="tssnippet">
                                       </code>
+                                      <span *ngIf="tssnippet">
+                                      <i class="fa fa-copy font-c" (click)="copyText(tssnippet)"	
+                                      *ngIf="copyIcon" title="Copy Code"></i>
+                                    </span>
                                   </pre>
-            </mat-tab>
-            <mat-tab label="SPEC TS">
-                <pre>
+      </mat-tab>
+      <mat-tab label="SPEC TS">
+        <pre>
                                       <code [innerHTML]="specsnippet">
                                       </code>
+                                      <span *ngIf="specsnippet">
+                                      <i class="fa fa-copy font-c" (click)="copyText(specsnippet)"	
+                                      *ngIf="copyIcon" title="Copy Code"></i>
+                                    </span>
                                   </pre>
-            </mat-tab>
-           
-            <mat-tab label="CSS">
-                <pre>
+      </mat-tab>
+
+      <mat-tab label="CSS">
+        <pre>
                        <code>
                                {{bscsssnippet}}
                        </code>
+                       <span *ngIf="bscsssnippet">	
+                        <i class="fa fa-copy font-c" (click)="copyText(bscsssnippet)"	
+                        *ngIf="copyIcon" title="Copy Code"></i>	
+                     </span>
                                       </pre>
-              </mat-tab>
-        
-              
-              <mat-tab label="TS CODE">
-                <pre>
+      </mat-tab>
+
+      <mat-tab label="TS CODE">
+        <pre>
                                              <code [innerHTML]="importsnippet">
                                             </code>
+                                            <span *ngIf="importsnippet">	
+                                                <i class="fa fa-copy font-c" (click)="copyText(importsnippet)"	
+                                                *ngIf="copyIcon" title="Copy Code"></i>	
+                                             </span>	
+                                           	
+                       <br><br>
                                             <code [innerHTML]="tscodesnippet">
                                             </code>
+                                            <span *ngIf="tscodesnippet">	
+                                                <i class="fa fa-copy font-c" (click)="copyText(tscodesnippet)"	
+                                                *ngIf="copyIcon" title="Copy Code"></i>	
+                                             </span>
                 </pre>
-              </mat-tab>
-        </mat-tab-group>
-    </div>
-    <br/>
-    
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <br />
+</div>
