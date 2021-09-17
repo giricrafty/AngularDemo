@@ -12,10 +12,8 @@ import { MatListModule } from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
-import {MatSidenavModule} from '@angular/material/sidenav'
-
-
-import {ReactiveFormsModule} from '@angular/forms'
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { ChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -41,6 +39,7 @@ import { BootstrapTestComponentComponent } from './bootstrap-test-component/boot
 import { ControllersComponent } from './controllers/controllers.component';
 import { HeaderComponent } from './header/header.component';
 import { MatTableModule } from '@angular/material/table';
+import { JpmcProjectLinkComponent } from './jpmc-project-link/jpmc-project-link.component';
 
 
 @NgModule({
@@ -50,7 +49,8 @@ import { MatTableModule } from '@angular/material/table';
     HtmlTestComponentComponent,
     BootstrapTestComponentComponent,
     ControllersComponent,
-    HeaderComponent
+    HeaderComponent,
+    JpmcProjectLinkComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +58,7 @@ import { MatTableModule } from '@angular/material/table';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    ChartsModule,
     // material import start
     MatProgressBarModule,
     MatInputModule,
