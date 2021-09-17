@@ -102,7 +102,12 @@
                 Check box:
             </td>
             <td>
-                <input required (change)='onChange(box.value)' #box value='' type='checkbox' [checked]='checked' />
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [checked]='checked'>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Check Me!!
+                    </label>
+                  </div>
             </td>
         </tr>
         <tr>
@@ -110,7 +115,15 @@
                 Radio:
             </td>
             <td>
-                <input required (change)='onChange(box.value)' #box value='' type='radio' [checked]='checked' />
+                <input required (change)='onChange(box.value)' #box value='Female' type='radio' [checked]='checked' />
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Male
+                  </label>
+                  <br>
+                <input required (change)='onChange(box.value)' #box value='Male' type='radio' />
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Female
+                  </label>
             </td>
         </tr>
         <tr>
