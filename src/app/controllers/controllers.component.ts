@@ -47,14 +47,11 @@ export class ControllersComponent implements OnInit {
   inputfields: TestElement[] = [];
   selectedComponent: string = "";
   selectedEvent: string = "";
+  copyIcon:boolean = false;
   //For Radio Change
    hideTabMat:boolean=true;
    hideBootTab:boolean=true;
    hideCompTab:boolean=true;
-   
-   
- 
- 
   columnSnippet: string = "";
   materialCloseTag: string = "";
   materialCloseTagSnippet: string = "";
@@ -100,6 +97,8 @@ export class ControllersComponent implements OnInit {
   selectValidation: any;
   selectEvent: any;
   selectStyle: any;
+ 
+
   private httpClient: HttpClient;
   constructor(http: HttpClient, private observer: BreakpointObserver) {
     this.httpClient = http;
@@ -116,6 +115,7 @@ export class ControllersComponent implements OnInit {
   onChange() {
     if (this.selectedComponent == "table") {
       this.hideEvent = true;
+      this.copyIcon = true;
       this.hideValidation = true;
       this.hideUserInput = false;
     } else {
@@ -166,7 +166,7 @@ export class ControllersComponent implements OnInit {
         tsTemplate = tsTemplate +" "+ JSON.stringify(this.template[this.dataSource[i].isc]["event"][this.dataSource[i].ise[0]]);
         console.log(tsTemplate)
       }
-      this.tableHtml = this.tableHtml.replace(this.tableHtml, this.bootstraphtmlsnippet + this.tableHtml + "</table");
+      this.tableHtml = this.tableHtml.replace(this.tableHtml, this.bootstraphtmlsnippet + this.tableHtml + "</table>");
       console.log(this.tableHtml)
 
       let bootstrapHtmlTemplate = this.tableHtml.split('<').join("\n<");
@@ -184,6 +184,7 @@ export class ControllersComponent implements OnInit {
       console.log(this.bootstraphtmlsnippet)
     }
     else {
+      console.log("else part")
       let events: string = "";
       for (let i = 0; i < this.selectedEvents.length; i++) {
         events = events + " " + JSON.stringify(this.template[this.selectedComponent]["event"][this.selectedEvents[i]]);
@@ -193,7 +194,7 @@ export class ControllersComponent implements OnInit {
       this.htmlsnippet = this.htmlsnippet.replace("<" + this.template[this.selectedComponent]["tag"], "<" + this.template[this.selectedComponent]["tag"] + events);
       console.log(this.htmlsnippet)
       this.bootstraphtmlsnippet = this.bootstraphtmlsnippet.replace("<" + this.template[this.selectedComponent]["tag"], "<" + this.template[this.selectedComponent]["tag"] + events);
-
+      this.copyIcon = true;
       //Validations template
       let validations: string = "";
       for (let i = 0; i < this.selectedValidation.length; i++) {
@@ -219,23 +220,24 @@ export class ControllersComponent implements OnInit {
       specTemplate = specTemplate.split(';').join("<br/>");
       specTemplate = specTemplate.split("\"").join("");
       this.specsnippet = specTemplate;
-      htmlTemplate = htmlTemplate.split('>').join(">\n");
+      htmlTemplate = htmlTemplate.split('<').join("\n<");
       this.htmlsnippet = htmlTemplate;
-      this.bootstraphtmlsnippet = bootstrapHtmlTemplate;
+      this.bootstraphtmlsnippet = bootstrapHtmlTemplate.split('<').join("\n<");
       console.log(this.htmlsnippet)
     }
     let cssTmpt = JSON.stringify(this.template[this.selectedComponent]["css"]);
 
-    this.csssnippet = cssTmpt.split("\"").join("");
+    //this.csssnippet = cssTmpt.split("\"").join("");
     console.log(this.csssnippet)
     //this.bshtmlsnippet = JSON.stringify(this.template[this.selectedComponent]["bootstraphtml"]);
     let bscssTmp = JSON.stringify(this.template[this.selectedComponent]["bootstrapcss"]);
     this.bscsssnippet = bscssTmp;
     //console.log(this.bscsssnippet);
-    this.tscodesnippet = JSON.stringify(this.template[this.selectedComponent]["tscode"]);
+    let tscodetmpt=JSON.stringify(this.template[this.selectedComponent]["tscode"]).split("\"").join("\n");
+    this.tscodesnippet = tscodetmpt.split(";").join(";\n");
     //this.tscodesnippet = tscodeTmp.split("\"").join("");
     console.log(this.tscodesnippet);
-    let importTmpt = JSON.stringify(this.template[this.selectedComponent]["import"]);
+    let importTmpt = JSON.stringify(this.template[this.selectedComponent]["import"]).split("\"").join("\n");
     this.importsnippet = importTmpt.split(";").join(";\n");
     console.log(this.importsnippet)
   }
@@ -292,4 +294,26 @@ export class ControllersComponent implements OnInit {
     }
     this.dataSource = this.inputfields;
   }
+ 
+    
+
+copyText(textVal:string){
+this.copyMessage(textVal)
+  }
+ 
+copyMessage(val: string) {
+const selBox = document.createElement('textarea');
+selBox.style.position = 'fixed';
+selBox.style.left = '0';
+selBox.style.top = '0';
+selBox.style.opacity = '0';
+selBox.value = val;
+document.body.appendChild(selBox);
+selBox.focus();
+selBox.select();
+document.execCommand('copy');
+document.body.removeChild(selBox);
+  }
+
+
 }
