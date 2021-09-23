@@ -26,16 +26,23 @@
         },
         "unittest":
         {
-            "keyup": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled(); }) })",
+            "keyup": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance; spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  expect(component.onKey).toHaveBeenCalled(); })",
 
-            "keyupenter": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKeyEnter'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupenter();  tick(); expect(component.onKeyEnter).toHaveBeenCalled(); }) })",
+            "keyupenter": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onKeyEnter'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupenter();   expect(component.onKeyEnter).toHaveBeenCalled(); })",
 
-            "blur": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onBlur'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.blur(); tick(); expect(component.onBlur).toHaveBeenCalled(); }) })",
+            "blur": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onBlur'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.blur();  expect(component.onBlur).toHaveBeenCalled(); })",
 
-            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })",
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change();  expect(component.onChange).toHaveBeenCalled(); })",
 
-            "keypress": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKeyPress'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupress();  tick(); expect(component.onKeyPress).toHaveBeenCalled(); }) })"
+            "keypress": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onKeyPress'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyupress();   expect(component.onKeyPress).toHaveBeenCalled(); })",
 
+            "required":"it('should have the required attribute working',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.validity.valid).toBeFalse(); expect(element.validationMessage).toEqual('Please fill out this field.') element.value='some input'; element.dispatchEvent(new Event('input')); expect(element.validity.valid).toBeTrue(); expect(element.validationMessage).toBe(''); })",
+            "placeholder":"it('should have placeholder value specified',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.placeholder).toBe('Please enter the value');})",
+            "disabled":"it('should have the disabled attribute working',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.disabled).toBeTrue(); expect(element.value).toBe(''); })",
+            "number":"it('should have the type number and working',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.type).toBe('number'); element.value='96'; element.dispatchEvent(new Event('input')); expect(element.value).toBe('96'); element.value='abc'; element.dispatchEvent(new Event('input')); expect(element.value).toBe(''); })",
+            "minlength":"it('should have the min and max values',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.minLength).toBe(3); expect(element.maxLength).toBe(9); element.value='abc'; element.dispatchEvent(new Event('input')); expect(element.value).toBe('abc'); })",
+            "maxlength":"it('should have the min and max values',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.minLength).toBe(3); expect(element.maxLength).toBe(9); element.value='abc'; element.dispatchEvent(new Event('input')); expect(element.value).toBe('abc'); })",
+            "email":"it('should have the valid email',()=>{ const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; element.value='abc@gmail.com'; element.dispatchEvent(new Event('input')); expect(element.validity.patternMismatch).toBeFalse(); element.value='abcgmailcom'; element.dispatchEvent(new Event('input')); expect(element.validity.patternMismatch).toBeTrue(); })"
         },
         "ts":
         {
@@ -65,7 +72,9 @@
         },
         "unittest":
         {
-            "tickInterval": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)"
+            "tickInterval": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();   expect(component.onKey).toHaveBeenCalled();)",
+            "required":"it('should have the valid range',()=>{ const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.type).toBe('range'); expect(element.min).toBe(component.min.toString()); expect(element.max).toBe(component.max.toString()); expect(element.step).toBe(component.step.toString()); expect(element.validity.valueMissing).toBeFalse(); })",
+            "disabled":"it('should have the valid range',()=>{ const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.type).toBe('range'); expect(element.min).toBe(component.min.toString()); expect(element.max).toBe(component.max.toString()); expect(element.step).toBe(component.step.toString()); expect(element.validity.valueMissing).toBeFalse(); })"
         },
         "ts":
         {
@@ -91,7 +100,9 @@
         },
         "unittest":
         {
-            "input": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)"
+            "input": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();   expect(component.onKey).toHaveBeenCalled();)",
+            "checked":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.checked).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         },
         "ts":
         {
@@ -120,7 +131,9 @@
         },
         "unittest":
         {
-            "input": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();  tick(); expect(component.onKey).toHaveBeenCalled();)"
+            "input": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onKey'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.keyup();   expect(component.onKey).toHaveBeenCalled();)",
+            "checked":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.checked).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         },
         "ts":
         {
@@ -145,7 +158,9 @@
         },
         "unittest":
         {
-            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-form-field')); input.nativeElement.change();  tick(); expect(component.onChange).toHaveBeenCalled();)"
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-form-field')); input.nativeElement.change();   expect(component.onChange).toHaveBeenCalled();)",
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         },
         "ts":
         {
@@ -169,7 +184,9 @@
         },
         "unittest":
         {
-            "click": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'openDialog'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('button')); input.nativeElement.click();  tick(); expect(component.openDialog).toHaveBeenCalled();)"
+            "click": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'openDialog'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('button')); input.nativeElement.click();   expect(component.openDialog).toHaveBeenCalled();)",
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         },
         "ts":
         {
@@ -200,7 +217,8 @@
             "determinate": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance; expect(progressComponent.value).toBe(40); expect(progressComponent.mode).toBe('determinate');",
             "indeterminate": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance;  expect(progressComponent.mode).toBe('indeterminate');",
             "buffer": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance;  expect(progressComponent.mode).toBe('buffer');",
-            "query": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance;  expect(progressComponent.mode).toBe('query');"
+            "query": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const progressElement = fixture.debugElement.query(By.css('mat-progress-bar'))!; const progressComponent = progressElement.componentInstance;  expect(progressComponent.mode).toBe('query');",
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })"
         },
         "ts":
         {
@@ -223,10 +241,11 @@
         },
         "ts":
         {
-            "change":"onChangeSelect(selectedValue: string){console.log('onChange = ' +selectedValue);}"
+            "change":"onChangeSelect(selectedValue: string){console.log('onChange = ' +selectedValue);}",
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })"
         },
         "unittest": {
-            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChangeSelect'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('select')); input.nativeElement.change(); tick(); expect(component.onChangeSelect).toHaveBeenCalled(); }) })"
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onChangeSelect'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('select')); input.nativeElement.change();  expect(component.onChangeSelect).toHaveBeenCalled(); })"
         }
     },
     "button": {
@@ -242,7 +261,8 @@
             "disabled": "disabled"
         },
         "unittest": {
-            "click": "it('should be button identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'eventClick'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-button')); input.nativeElement.click(); tick(); expect(component.eventClick).toHaveBeenCalled(); }) })"
+            "click": "it('should be button identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'eventClick'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-button')); input.nativeElement.click();  expect(component.eventClick).toHaveBeenCalled(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         },
         "ts": {
             "click": "eventClick(getForm: string) {console.log(getForm);}"
@@ -264,7 +284,8 @@
             "change":"onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
             },
         "unittest": {
-            "change": "it('should be button toggle identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-button-toggle-group')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+            "change": "it('should be button toggle identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('mat-button-toggle-group')); input.nativeElement.change();  expect(component.onChange).toHaveBeenCalled(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         }
     },
     "checkbox":{
@@ -285,7 +306,9 @@
         "change":"onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
         },
         "unittest": {
-        "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+        "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change();  expect(component.onChange).toHaveBeenCalled(); })",
+        "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         }
     },
     "radio":{
@@ -303,7 +326,9 @@
             "disabled": "disabled"
         },
         "unittest": {
-            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => { spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }) })"
+            "change": "it('should be input identification', () => { const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;   spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change();  expect(component.onChange).toHaveBeenCalled(); })",
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         },
         "ts": {
             "change":"onChange(boxvalue:string){console.log('onChange = ' +boxvalue);}"
@@ -331,10 +356,25 @@
             "email":"pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$'"
         },
         "unittest": {
-            "change": "it('should be input identification', () => {​​​​​​​​ const fixture = TestBed.createComponent(AppComponent); const component = fixture.componentInstance;  fakeAsync(() => {​​​​​​​​ spyOn(component, 'onChange'); fixture.detectChanges();  const input = fixture.debugElement.query(By.css('input')); input.nativeElement.change(); tick(); expect(component.onChange).toHaveBeenCalled(); }​​​​​​​​) }​​​​​​​​)"
+            "keyup": "it('should have input *event* working', () => { const fixture = TestBed.createComponent(*Component*); const component = fixture.componentInstance; spyOn(component, '*event*'); fixture.detectChanges(); const input = fixture.debugElement.query(By.css('input')); input.nativeElement.dispatchEvent(new KeyboardEvent('*event*')); expect(component.onKey).toHaveBeenCalled(); })",
+            "keyupenter": "it('should have input *event* working', () => { const fixture = TestBed.createComponent(*Component*); const component = fixture.componentInstance; spyOn(component, '*event*'); fixture.detectChanges(); const input = fixture.debugElement.query(By.css('input')); input.nativeElement.dispatchEvent(new KeyboardEvent('*event*')); expect(component.onKey).toHaveBeenCalled(); })",
+            "blur": "it('should have input *event* working', () => { const fixture = TestBed.createComponent(*Component*); const component = fixture.componentInstance; spyOn(component, '*event*'); fixture.detectChanges(); const input = fixture.debugElement.query(By.css('input')); input.nativeElement.dispatchEvent(new KeyboardEvent('*event*')); expect(component.onKey).toHaveBeenCalled(); })",
+            "keypress":"it('should have input *event* working', () => { const fixture = TestBed.createComponent(*Component*); const component = fixture.componentInstance; spyOn(component, '*event*'); fixture.detectChanges(); const input = fixture.debugElement.query(By.css('input')); input.nativeElement.dispatchEvent(new KeyboardEvent('*event*')); expect(component.onKey).toHaveBeenCalled(); })",
+            "change":"it('should have input *event* working', () => { const fixture = TestBed.createComponent(*Component*); const component = fixture.componentInstance; spyOn(component, '*event*'); fixture.detectChanges(); const input = fixture.debugElement.query(By.css('input')); input.nativeElement.dispatchEvent(new KeyboardEvent('*event*')); expect(component.onKey).toHaveBeenCalled(); })",
+            "required":"it('should have the required attribute working',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.validity.valid).toBeFalse(); expect(element.validationMessage).toEqual('Please fill out this field.') element.value='some input'; element.dispatchEvent(new Event('input')); expect(element.validity.valid).toBeTrue(); expect(element.validationMessage).toBe(''); })",
+            "placeholder":"it('should have placeholder value specified',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.placeholder).toBe('Please enter the value');})",
+            "disabled":"it('should have the disabled attribute working',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.disabled).toBeTrue(); expect(element.value).toBe(''); })",
+            "number":"it('should have the type number and working',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.type).toBe('number'); element.value='96'; element.dispatchEvent(new Event('input')); expect(element.value).toBe('96'); element.value='abc'; element.dispatchEvent(new Event('input')); expect(element.value).toBe(''); })",
+            "minlength":"it('should have the min and max values',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.minLength).toBe(3); expect(element.maxLength).toBe(9); element.value='abc'; element.dispatchEvent(new Event('input')); expect(element.value).toBe('abc'); })",
+            "maxlength":"it('should have the min and max values',()=>{; const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; expect(element.minLength).toBe(3); expect(element.maxLength).toBe(9); element.value='abc'; element.dispatchEvent(new Event('input')); expect(element.value).toBe('abc'); })",
+            "email":"it('should have the valid email',()=>{ const element:HTMLInputElement=fixture.debugElement.query(By.css('input')).nativeElement; element.value='abc@gmail.com'; element.dispatchEvent(new Event('input')); expect(element.validity.patternMismatch).toBeFalse(); element.value='abcgmailcom'; element.dispatchEvent(new Event('input')); expect(element.validity.patternMismatch).toBeTrue(); })"
         },
         "ts": {
-            "change": "onChange(boxvalue:string){​​​​​​​​console.log('onChange = ' +boxvalue);}​​​​​​​​"
+            "change": "onChange(boxvalue:string){​​​​​​​​console.log('onChange = ' +boxvalue);}​​​​​​​​",
+            "keypress": "onkeypress(boxvalue:string){​​​​​​​​console.log('onkeypress = ' +boxvalue);}​​​​​​​​",
+            "blur": "onblur(boxvalue:string){​​​​​​​​console.log('onblur= ' +boxvalue);}​​​​​​​​",
+            "keyupenter": "onkeyupenter(boxvalue:string){​​​​​​​​console.log('onkeyupenter = ' +boxvalue);}​​​​​​​​",
+            "keyup":"onKey(boxvalue:string){console.log('onKey = ' + boxvalue);}"
         }
     },
     "list": {
@@ -351,7 +391,8 @@
             "disabled": "disabled"
         },
         "unittest": {
-
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         },
         "ts": {}
     },
@@ -369,7 +410,9 @@
             "disabled": "disabled"
         },
         "unittest": {
-            "none": ""
+            "none": "",
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
         },
         "ts": {
             "none": ""
@@ -445,7 +488,10 @@
             "required": "required",
             "disabled": "disabled"
         },
-        "unittest": {},
+        "unittest": {
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
+        },
         "ts": {}
     },
     "sidenav": {
@@ -463,7 +509,10 @@
             "required": "required",
             "disabled": "disabled"
         },
-        "unittest": {},
+        "unittest": {
+            "required":"it('should be checked',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.required).toBeTrue(); })",
+            "disabled":"it('should be disabled',()=>{ const element:HTMLInputElement=fixture.debugElement.query(**Include selector**).nativeElement; expect(element.disabled).toBeTrue(); })"
+        },
         "ts": {}
     },
     "bar-chart": {
