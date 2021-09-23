@@ -214,6 +214,10 @@ export class ControllersComponent implements OnInit {
         tsTemplate = tsTemplate + " " + JSON.stringify(this.template[this.selectedComponent]["ts"][this.selectedEvents[i]]);
         specTemplate = specTemplate + "<br/><br/>\/\/Spec functionality for " + this.selectedEvents[i] + "<br/><br/>" + JSON.stringify(this.template[this.selectedComponent]["unittest"][this.selectedEvents[i]]);
       }
+      for (let i = 0; i < this.selectedValidation.length; i++) {	
+        tsTemplate = tsTemplate + " " + JSON.stringify(this.template[this.selectedComponent]["ts"][this.selectedValidation[i]]);	
+        specTemplate = specTemplate + "<br/><br/>\/\/Spec functionality for " + this.selectedValidation[i] + "<br/><br/>" + JSON.stringify(this.template[this.selectedComponent]["unittest"][this.selectedValidation[i]]);	
+      }
 
       tsTemplate = tsTemplate.split("\"").join("<br/>");
       this.tssnippet = tsTemplate;
@@ -225,9 +229,9 @@ export class ControllersComponent implements OnInit {
       this.bootstraphtmlsnippet = bootstrapHtmlTemplate.split('<').join("\n<");
       console.log(this.htmlsnippet)
     }
-    let cssTmpt = JSON.stringify(this.template[this.selectedComponent]["css"]);
+    let cssTmpt = JSON.stringify(this.template[this.selectedComponent]["css"]) || "Not Available";
 
-    //this.csssnippet = cssTmpt.split("\"").join("");
+    this.csssnippet = cssTmpt.split("\"").join("");
     console.log(this.csssnippet)
     //this.bshtmlsnippet = JSON.stringify(this.template[this.selectedComponent]["bootstraphtml"]);
     let bscssTmp = JSON.stringify(this.template[this.selectedComponent]["bootstrapcss"]);
@@ -237,7 +241,7 @@ export class ControllersComponent implements OnInit {
     this.tscodesnippet = tscodetmpt.split(";").join(";\n");
     //this.tscodesnippet = tscodeTmp.split("\"").join("");
     console.log(this.tscodesnippet);
-    let importTmpt = JSON.stringify(this.template[this.selectedComponent]["import"]).split("\"").join("\n");
+    let importTmpt = JSON.stringify(this.template[this.selectedComponent]["import"]).split("\"").join("\n") || "Not Available";
     this.importsnippet = importTmpt.split(";").join(";\n");
     console.log(this.importsnippet)
   }
@@ -314,6 +318,4 @@ selBox.select();
 document.execCommand('copy');
 document.body.removeChild(selBox);
   }
-
-
 }
